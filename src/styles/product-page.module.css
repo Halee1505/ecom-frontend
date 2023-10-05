@@ -1,0 +1,254 @@
+.product-page {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.product-content {
+    box-shadow: 0 0 12px 3px rgb(176 176 176 / 41%);
+    width: 100%;
+    max-width: max-content;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.product-content img {
+    height: 500px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    background-color: #fff;
+}
+
+.product-detail {
+    padding: 30px;
+    width: 380px;
+    line-height: 2.2em;
+    background-color: #fff;
+}
+
+.product-detail h1 {
+    font-size: 20px;
+    margin: 0 0 10px;
+    font-weight: 600;
+    line-height: 24px;
+    text-transform: uppercase;
+    height: 45px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+}
+
+.product-detail span {
+    font-size: 16px;
+}
+
+.product-detail .price {
+
+    color: #ff0000;
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.button-box {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    justify-content: space-between;
+    align-self: center;
+}
+
+.button-box>div {
+    display: flex;
+    gap: 10px;
+    width: max-content;
+}
+
+.button-box>div * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+    width: max-content;
+    min-width: 35px;
+    border: 1px solid #eee;
+    background-color: #eee;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+
+
+.button-box>span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    border: 0;
+    background-color: #fff;
+
+}
+
+.button-box button {
+    font-weight: 800;
+    cursor: pointer;
+
+}
+
+.button-box button:active {
+    transform: scale(0.9);
+}
+
+.cart {
+    display: flex;
+    gap: 12px;
+}
+
+.cart button {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    width: max-content;
+    border: 1px solid #eee;
+    background-color: #eee;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 8px 10px;
+    transition: all 0.2s ease-in-out;
+}
+
+.cart button:first-child {
+    color: var(--primary-color);
+    background-color: #fff;
+    border-color: var(--primary-color);
+}
+
+.cart button:last-child {
+    color: #fff;
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.cart button:active {
+    transform: scale(0.9);
+}
+
+.description {
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 0 12px 3px rgb(176 176 176 / 41%);
+    margin: 30px 120px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+}
+
+.description>div>a {
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+    color: #fff;
+    background-color: var(--primary-color);
+    padding: 6px 10px;
+    border-radius: 10px;
+}
+
+.description>div {
+    background-color: #fff;
+}
+
+.description>div>h3 {
+    font-size: 18px;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.related {
+    width: max-content;
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.related-item {
+    display: flex;
+    align-items: center;
+    border-top: 2px solid #eee;
+    padding: 10px;
+}
+
+.related-item:last-child {
+    border-bottom: 2px solid #eee;
+}
+
+.related-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.related-item>div {
+    width: 200px;
+    margin-left: 20px;
+}
+
+.related-item>div>h2 {
+    font-size: 13px;
+    font-weight: 600;
+    height: 35px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+
+}
+
+.related-item>div>span {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.detail-description {
+    margin-right: 20px;
+    position: relative;
+}
+
+.detail-description::after {
+    content: "";
+    position: absolute;
+    top: -20px;
+    bottom: -20px;
+
+    right: -30px;
+    width: 10px;
+    background-color: #eee;
+}
+
+.detail-description>h2 {
+    font-size: 18px;
+}

@@ -2,10 +2,11 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:1505",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "nodemon next start",
     "lint": "next lint"
   },
   "dependencies": {

@@ -1,0 +1,66 @@
+import AddToCart from "@/components/addToCart";
+import ProductItem from "@/components/productItem";
+import { Product } from "@/model/product";
+import { formatNumberWithCommas } from "@/utils/formatMoney";
+
+const CategoryPage = async ({ params }: { params: { slug: string } }) => {
+  const product: Product = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/${params.slug}`, {
+    next: {
+      revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE),
+    },
+  })
+    .then((res) => res.json())
+    .catch((err) => {
+      console.error(err);
+      return null;
+    });
+  const productsSameCategory: Product[] = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${product.category.slug}?limit=4`,
+    {
+      next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
+    }
+  )
+    .then((res) => res.json())
+    .catch((err) => {
+      console.error(err);
+      return [];
+    });
+  return (
+    <div className="product-page">
+      <div className="product-content">
+        <img src={product.image} alt={product.name} />
+        <div className="product-detail">
+          <h1>{product.name}</h1>
+          <span>Đã bán: {product.sold}</span>
+          <p className="price">{formatNumberWithCommas(product.price)} đ</p>
+          <AddToCart product={product} />
+        </div>
+      </div>
+      <div className="description">
+        <div className="detail-description">
+          <h2>Mô tả:</h2>
+          <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
+        </div>
+        <div>
+          <h3>Sản phẩm cùng danh mục</h3>
+          <div className="related">
+            {productsSameCategory.map((product) => (
+              <a href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
+                <img src={product.image} alt={product.name} />
+                <div>
+                  <h2>{product.name}</h2>
+                  <span>
+                    {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CategoryPage;
