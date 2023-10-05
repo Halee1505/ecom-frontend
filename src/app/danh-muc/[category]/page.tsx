@@ -1,5 +1,6 @@
 import ProductItem from "@/components/productItem";
 import { Product } from "@/model/product";
+import Link from "next/link";
 
 const CategoryPage = async ({
   params,
@@ -47,13 +48,13 @@ const CategoryPage = async ({
             {Array(Math.ceil(productsCount.count / 8))
               .fill(0)
               .map((_, index) => (
-                <a
+                <Link
                   href={index === 0 ? `/danh-muc/${params.category}` : `/danh-muc/${params.category}?page=${index + 1}`}
                   key={index}
                   className={index + 1 === page ? "active" : ""}
                 >
                   {index + 1}
-                </a>
+                </Link>
               ))}
           </div>
         </div>

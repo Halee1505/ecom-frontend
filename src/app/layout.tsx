@@ -2,6 +2,7 @@ import { Category } from "@/model/category";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -79,13 +80,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <nav>
             <ul>
               <li key={0}>
-                <a href={`/`} className="home">
+                <Link href={`/`} className="home">
                   TRANG CHỦ
-                </a>
+                </Link>
               </li>
               {posts.map((post) => (
                 <li key={post._id}>
-                  <a href={`/danh-muc/${post.slug}`}>{post.name}</a>
+                  <Link href={`/danh-muc/${post.slug}`}>{post.name}</Link>
                 </li>
               ))}
             </ul>
@@ -101,7 +102,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <li className="fooer-phone">
                   <label className="mr5">Phone: </label>
                   <span>
-                    <a href={`${process.env.NEXT_PUBLIC_HOTLINE}`}>{process.env.NEXT_PUBLIC_HOTLINE}</a>
+                    <Link href={`${process.env.NEXT_PUBLIC_HOTLINE}`}>{process.env.NEXT_PUBLIC_HOTLINE}</Link>
                   </span>
                 </li>
                 <li className="footer-email">

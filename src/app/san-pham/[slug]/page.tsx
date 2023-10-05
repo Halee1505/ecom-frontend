@@ -2,6 +2,7 @@ import AddToCart from "@/components/addToCart";
 import ProductItem from "@/components/productItem";
 import { Product } from "@/model/product";
 import { formatNumberWithCommas } from "@/utils/formatMoney";
+import Link from "next/link";
 
 const CategoryPage = async ({ params }: { params: { slug: string } }) => {
   const product: Product = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/${params.slug}`, {
@@ -45,7 +46,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
           <h3>Sản phẩm cùng danh mục</h3>
           <div className="related">
             {productsSameCategory.map((product) => (
-              <a href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
+              <Link href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
                 <img src={product.image} alt={product.name} />
                 <div>
                   <h2>{product.name}</h2>
@@ -53,10 +54,10 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
                     {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
-          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
+          <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
         </div>
       </div>
     </div>
