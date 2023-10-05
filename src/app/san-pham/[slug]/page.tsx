@@ -56,8 +56,14 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
                 </div>
               </Link>
             ))}
+            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
           </div>
-          <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
+          <div className="mobile-related">
+            {productsSameCategory.map((product) => (
+              <ProductItem key={product._id} product={product} />
+            ))}
+            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
+          </div>
         </div>
       </div>
     </div>

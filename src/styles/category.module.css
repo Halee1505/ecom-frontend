@@ -83,15 +83,15 @@ nav>ul>li>a:hover {
     justify-content: stretch;
     align-items: stretch;
 
-    padding-left: 150px;
-    padding-right: 150px;
 }
 
 .category-product>h1 {
-    width: 100%;
     margin: 10px;
     margin-left: auto;
     font-size: 20px;
+
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .category-product>* {
@@ -99,7 +99,6 @@ nav>ul>li>a:hover {
 }
 
 .category-product>h1 {
-    width: 100%;
     margin: 10px !important;
     margin-left: auto;
     font-size: 20px;
@@ -119,6 +118,7 @@ nav>ul>li>a:hover {
     justify-content: flex-end;
     align-items: center;
     gap: 10px;
+    padding: 0px 20px;
 
 }
 
