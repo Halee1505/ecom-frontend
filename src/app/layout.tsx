@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const posts: Category[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/categories`, {
+  const categories: Category[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/categories?isActive=true`, {
     next: {
       revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE),
     },
@@ -84,9 +84,16 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   TRANG CHỦ
                 </Link>
               </li>
-              {posts.map((post) => (
-                <li key={post._id}>
-                  <Link href={`/danh-muc/${post.slug}`}>{post.name}</Link>
+              {categories.map((category) => (
+                <li key={category._id} className="category-item">
+                  <Link href={`/danh-muc/${category.slug}`}>{category.name}</Link>
+                  <div className="category-child">
+                    {category.child?.map((child) => (
+                      <Link key={child._id} href={`/danh-muc/${child.slug}`}>
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
                 </li>
               ))}
             </ul>

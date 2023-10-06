@@ -1,7 +1,7 @@
 import { Category } from "./category";
 
 export interface Product {
-  _id: string;
+  _id?: string;
   name: string;
   image: string;
   slug: string;
@@ -11,6 +11,6 @@ export interface Product {
   inventory: number;
   sold: number;
   isActive: Boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

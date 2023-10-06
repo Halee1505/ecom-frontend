@@ -13,7 +13,7 @@ const CategoryPage = async ({
   const limit = searchParams?.limit ? Number(searchParams.limit) : 8;
   const offset = (page - 1) * limit;
   const products: Product[] = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${params.category}?limit=${limit}&offset=${offset}`,
+    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${params.category}?limit=${limit}&offset=${offset}&isActive=true`,
     {
       next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
     }
@@ -24,7 +24,7 @@ const CategoryPage = async ({
       return [];
     });
   const productsCount: { count: number } = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${params.category}/count`,
+    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${params.category}/count?isActive=true`,
     {
       next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
     }
@@ -36,31 +36,32 @@ const CategoryPage = async ({
     });
   return (
     <div>
-      {products?.[0]?.category?.name ? (
-        <div className="category-product">
-          <h1>Danh mục: {products?.[0]?.category.name}</h1>
-          <div className="product-list">
-            {products?.map((product) => (
-              <ProductItem key={product._id} product={product} />
-            ))}
-          </div>
-          <div className="pagination">
-            {Array(Math.ceil(productsCount.count / 8))
-              .fill(0)
-              .map((_, index) => (
-                <Link
-                  href={index === 0 ? `/danh-muc/${params.category}` : `/danh-muc/${params.category}?page=${index + 1}`}
-                  key={index}
-                  className={index + 1 === page ? "active" : ""}
-                >
-                  {index + 1}
-                </Link>
-              ))}
-          </div>
+      <div className="category-product">
+        {/* <div className="search">
+          <input type="text" placeholder="Tìm kiếm sản phẩm" />
+          <button>
+            Timf
+          </button>
+        </div> */}
+        <div className="product-list">
+          {products?.map((product) => (
+            <ProductItem key={product._id} product={product} />
+          ))}
         </div>
-      ) : (
-        <p className="empty">Danh mục này chưa có sản phẩm</p>
-      )}
+        <div className="pagination">
+          {Array(Math.ceil(productsCount.count / 8))
+            .fill(0)
+            .map((_, index) => (
+              <Link
+                href={index === 0 ? `/danh-muc/${params.category}` : `/danh-muc/${params.category}?page=${index + 1}`}
+                key={index}
+                className={index + 1 === page ? "active" : ""}
+              >
+                {index + 1}
+              </Link>
+            ))}
+        </div>
+      </div>
     </div>
   );
 };

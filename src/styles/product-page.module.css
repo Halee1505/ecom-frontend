@@ -184,6 +184,7 @@
 
 .related {
     width: max-content;
+    min-width: 300px;
     margin-top: 10px;
     margin-bottom: 20px;
 
@@ -198,6 +199,7 @@
     align-items: center;
     border-top: 2px solid #eee;
     padding: 10px;
+
 }
 
 .related-item:last-child {

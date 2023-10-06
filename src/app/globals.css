@@ -98,8 +98,26 @@ a {
   }
 }
 
+button {
+  transition: all 0.2s ease-in-out;
+
+}
+
+
+button:active {
+  transform: scale(0.9);
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
 @import url("@/styles/category.module.css");
+@import url("@/styles/check.module.css");
 @import url("@/styles/main.module.css");
 @import url("@/styles/product-item.module.css");
+@import url("@/styles/delete-btn.module.css");
 @import url("@/styles/product-page.module.css");
+@import url("@/styles/admin.module.css");
 @import url("@/styles/media.module.css");

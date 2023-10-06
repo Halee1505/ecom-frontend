@@ -41,7 +41,7 @@ nav>ul>li>a {
     font-weight: 400;
 }
 
-nav>ul>li>a::before {
+nav>ul>li a::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -56,7 +56,7 @@ nav>ul>li>a::before {
     transition: all 0.3s ease-in-out 0s;
 }
 
-nav>ul>li>a:hover::before {
+nav>ul>li a:hover::before {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
@@ -135,4 +135,41 @@ nav>ul>li>a:hover {
 .pagination a.active {
     color: #fff;
     background-color: var(--primary-color);
+}
+
+.category-item {
+    position: relative;
+}
+
+.category-item>.category-child {
+    width: 250px;
+    height: max-content;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    z-index: 2;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 6px;
+    transform-origin: top center;
+    transform: scaleY(0);
+    transition: all 0.3s ease-in-out;
+    margin-top: 10px;
+}
+
+.category-item:hover>.category-child {
+    transform: scaleY(1);
+
+}
+
+.category-item>.category-child>a {
+    padding: 2px 10px;
+    position: relative;
+    color: #000;
+    transition: all 0.3s ease-in-out;
+}
+
+.category-item>.category-child>a:hover {
+    color: var(--primary-color);
 }

@@ -95,6 +95,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    height: max-content;
+    gap: 10px;
+
 }
 
 .term * {
@@ -217,4 +220,5 @@ footer {
     width: max-content;
     gap: 30px;
     margin: 0 auto;
+    margin-top: 30px;
 }

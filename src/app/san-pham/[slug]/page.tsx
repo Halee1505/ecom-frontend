@@ -16,7 +16,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
       return null;
     });
   const productsSameCategory: Product[] = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${product.category.slug}?limit=4`,
+    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${product.category?.slug}?limit=4`,
     {
       next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
     }

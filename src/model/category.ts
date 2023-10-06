@@ -3,6 +3,7 @@ export interface Category {
   name: string;
   slug: string;
   isActive: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  child: Category[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
