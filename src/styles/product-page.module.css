@@ -196,6 +196,7 @@
     /* background-color: #eee; */
 }
 
+
 .related>a:last-child {
     display: block;
     width: max-content;
@@ -277,8 +278,22 @@
     position: relative;
     padding: 20px;
     box-shadow: 0 0 12px 3px rgb(176 176 176 / 41%);
-
+    width: 100%;
+    max-width: 1100px;
 }
+
+.detail-description img {
+    max-width: 100%;
+}
+
+.detail-description>div {
+    line-height: 1.8em;
+}
+
+.detail-description>div li {
+    margin-left: 20px;
+}
+
 
 
 
