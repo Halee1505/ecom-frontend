@@ -227,3 +227,8 @@
 .admin-products .pagination {
     margin-top: 20px;
 }
+
+.editor {
+    width: 100%;
+    font-size: 0.8em;
+}

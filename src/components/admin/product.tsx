@@ -1,6 +1,7 @@
 import { Category } from "@/model/category";
 import { Product } from "@/model/product";
-import { use, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 
 const getCategory = async () => {
   const categories: Category[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/sub-categories`, {
@@ -18,6 +19,8 @@ const getCategory = async () => {
 };
 
 const AdminProduct = () => {
+  const editorRef = useRef<unknown>();
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [products, setProducts] = useState<Product>({
     name: "",
@@ -146,16 +149,48 @@ const AdminProduct = () => {
             <tr>
               <td>Mô tả</td>
               <td>
-                <textarea
-                  name=""
-                  id=""
-                  cols={30}
-                  rows={10}
-                  onChange={(e) => {
-                    setProducts({ ...products, description: e.target.value });
-                  }}
-                  value={products?.description}
-                ></textarea>
+                <div className="editor">
+                  <Editor
+                    apiKey={process.env.NEXT_PUBLIC_TINY_API_KEY}
+                    onInit={(evt, editor) => (editorRef.current = editor)}
+                    onEditorChange={(e) => {
+                      setProducts({ ...products, description: e });
+                    }}
+                    initialValue=" "
+                    init={{
+                      height: 500,
+                      menubar: false,
+                      plugins: [
+                        "advlist",
+                        "autolink",
+                        "lists",
+                        "link",
+                        "image",
+                        "charmap",
+                        "preview",
+                        "anchor",
+                        "searchreplace",
+                        "visualblocks",
+                        "code",
+                        "fullscreen",
+                        "insertdatetime",
+                        "media",
+                        "table",
+                        "code",
+                        "help",
+                        "wordcount",
+                        "image",
+                      ],
+                      toolbar:
+                        "undo redo | blocks | " +
+                        "bold italic underlined forecolor | alignleft aligncenter " +
+                        "alignright alignjustify | bullist numlist outdent indent | " +
+                        "removeformat | help" +
+                        "link image ",
+                      content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                    }}
+                  />
+                </div>
               </td>
             </tr>
           </tbody>
