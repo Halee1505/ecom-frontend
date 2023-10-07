@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:1505",
+  "proxy": "https://ecom-server-po2d.onrender.com",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

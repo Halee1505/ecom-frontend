@@ -80,18 +80,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <nav>
             <ul>
               <li key={0}>
-                <Link href={`/`} className="home">
+                <a href={`/`} className="home">
                   TRANG CHỦ
-                </Link>
+                </a>
               </li>
               {categories.map((category) => (
                 <li key={category._id} className="category-item">
-                  <Link href={`/danh-muc/${category.slug}`}>{category.name}</Link>
+                  <a href={`/danh-muc/${category.slug}`}>{category.name}</a>
                   <div className="category-child">
                     {category.child?.map((child) => (
-                      <Link key={child._id} href={`/danh-muc/${child.slug}`}>
+                      <a key={child._id} href={`/danh-muc/${child.slug}`}>
                         {child.name}
-                      </Link>
+                      </a>
                     ))}
                   </div>
                 </li>
@@ -109,7 +109,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <li className="fooer-phone">
                   <label className="mr5">Phone: </label>
                   <span>
-                    <Link href={`${process.env.NEXT_PUBLIC_HOTLINE}`}>{process.env.NEXT_PUBLIC_HOTLINE}</Link>
+                    <a href={`${process.env.NEXT_PUBLIC_HOTLINE}`}>{process.env.NEXT_PUBLIC_HOTLINE}</a>
                   </span>
                 </li>
                 <li className="footer-email">
