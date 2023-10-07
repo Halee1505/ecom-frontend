@@ -46,7 +46,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
           <h3>Sản phẩm cùng danh mục</h3>
           <div className="related">
             {productsSameCategory.map((product) => (
-              <Link href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
+              <a href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
                 <img src={product.image} alt={product.name} />
                 <div>
                   <h2>{product.name}</h2>
@@ -54,15 +54,15 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
                     {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
                   </span>
                 </div>
-              </Link>
+              </a>
             ))}
-            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
+            <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
           </div>
           <div className="mobile-related">
             {productsSameCategory.map((product) => (
               <ProductItem key={product._id} product={product} />
             ))}
-            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
+            <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
           </div>
         </div>
       </div>
