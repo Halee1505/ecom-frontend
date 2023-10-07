@@ -46,6 +46,16 @@ const AdminProduct = () => {
   }, []);
 
   const handleCreate = async () => {
+    if (
+      !products.name ||
+      !products.price ||
+      !products.inventory ||
+      !products.description ||
+      (listImg.length === 1 && listImg[0]?.value == "")
+    ) {
+      alert("Vui lòng điền đầy đủ thông tin");
+      return;
+    }
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products`, {
       method: "POST",
       headers: {
