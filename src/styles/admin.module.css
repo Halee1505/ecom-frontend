@@ -209,7 +209,7 @@
 }
 
 .admin-products .product-list {
-    height: 300px;
+    height: max-content;
 }
 
 .admin-products .product-item {
