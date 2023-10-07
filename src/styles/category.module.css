@@ -3,17 +3,22 @@ nav {
     background-color: #fff;
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
+    padding: 0px 20px;
+
 }
+
 
 nav>ul {
     margin-top: 0px;
+    width: max-content;
     margin-bottom: 0px;
     float: none;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 1vw;
     line-height: 2em;
 }
 
@@ -28,7 +33,7 @@ nav>ul>li>a {
     position: relative;
     display: block;
     white-space: nowrap;
-    font-size: 16px;
+    font-size: 1em;
     text-transform: uppercase;
     color: #333;
     -webkit-transition: all .25s ease;
@@ -82,13 +87,14 @@ nav>ul>li>a:hover {
     flex-direction: column;
     justify-content: stretch;
     align-items: stretch;
+    min-height: 80vh;
 
 }
 
 .category-product>h1 {
     margin: 10px;
     margin-left: auto;
-    font-size: 20px;
+    font-size: 1.2em;
 
     padding-left: 10%;
     padding-right: 10%;
@@ -101,13 +107,13 @@ nav>ul>li>a:hover {
 .category-product>h1 {
     margin: 10px !important;
     margin-left: auto;
-    font-size: 20px;
+    font-size: 1.2em;
 }
 
 .empty {
     width: 100%;
     padding: 50px;
-    font-size: 18px;
+    font-size: 1.1em;
     text-align: center;
 
 }
@@ -142,6 +148,7 @@ nav>ul>li>a:hover {
 }
 
 .category-item>.category-child {
+
     width: 250px;
     height: max-content;
     position: absolute;

@@ -13,6 +13,10 @@
     margin-bottom: 20px !important;
 }
 
+.category-item {
+    z-index: 20;
+}
+
 .banner>img {
     width: 100%;
     aspect-ratio: 24/9;

@@ -21,6 +21,7 @@
 
 .product-content img {
     height: 30vw;
+    max-height: 400px;
     aspect-ratio: 1/1;
     object-fit: contain;
     background-color: #fff;
@@ -152,16 +153,16 @@
 
 .description {
     margin-top: 20px;
-    padding: 20px;
-    box-shadow: 0 0 12px 3px rgb(176 176 176 / 41%);
     margin: 30px 120px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    gap: 24px;
+    gap: 10px;
+    max-width: 1500px;
+    /* background-color: #eee; */
 }
 
-.description>div>.related>a:last-child {
+.related>a:last-child {
     display: block;
     width: max-content;
     margin: 0 auto;
@@ -178,21 +179,24 @@
 .description>div>h3 {
     font-size: 18px;
     text-align: center;
-    margin: 0px;
+    margin: 10px auto;
+    margin-top: 0px;
     padding: 0px;
 }
 
 .related {
     width: max-content;
     min-width: 300px;
-    margin-top: 10px;
-    margin-bottom: 20px;
 
+    padding: 20px;
+    height: max-content;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
+    box-shadow: 0 0 12px 3px rgb(176 176 176 / 41%);
 }
+
 
 .related-item {
     display: flex;
@@ -236,20 +240,13 @@
 }
 
 .detail-description {
-    margin-right: 20px;
     position: relative;
+    padding: 20px;
+    box-shadow: 0 0 12px 3px rgb(176 176 176 / 41%);
+
 }
 
-.detail-description::after {
-    content: "";
-    position: absolute;
-    top: -20px;
-    bottom: -20px;
 
-    right: -30px;
-    width: 10px;
-    background-color: #eee;
-}
 
 .detail-description>h2 {
     font-size: 18px;

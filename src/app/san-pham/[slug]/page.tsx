@@ -41,28 +41,26 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
           <h2>Mô tả:</h2>
           <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
         </div>
-        <div>
+        <div className="related">
           <h3>Sản phẩm cùng danh mục</h3>
-          <div className="related">
-            {productsSameCategory.map((product) => (
-              <Link href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
-                <img src={product.image} alt={product.name} />
-                <div>
-                  <h2>{product.name}</h2>
-                  <span>
-                    {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
-                  </span>
-                </div>
-              </Link>
-            ))}
-            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
-          </div>
-          <div className="mobile-related">
-            {productsSameCategory.map((product) => (
-              <ProductItem key={product._id} product={product} />
-            ))}
-            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
-          </div>
+          {productsSameCategory.map((product) => (
+            <Link href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
+              <img src={product.image} alt={product.name} />
+              <div>
+                <h2>{product.name}</h2>
+                <span>
+                  {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
+                </span>
+              </div>
+            </Link>
+          ))}
+          <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
+        </div>
+        <div className="mobile-related">
+          {productsSameCategory.map((product) => (
+            <ProductItem key={product._id} product={product} />
+          ))}
+          <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
         </div>
       </div>
     </div>

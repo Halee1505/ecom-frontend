@@ -84,18 +84,21 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                   TRANG CHỦ
                 </Link>
               </li>
-              {categories.map((category) => (
-                <li key={category._id} className="category-item">
-                  <Link href={`/danh-muc/${category.slug}`}>{category.name}</Link>
-                  <div className="category-child">
-                    {category.child?.map((child) => (
-                      <Link key={child._id} href={`/danh-muc/${child.slug}`}>
-                        {child.name}
-                      </Link>
-                    ))}
-                  </div>
-                </li>
-              ))}
+              {categories?.length > 0 &&
+                categories.map((category) => (
+                  <li key={category._id} className="category-item">
+                    <Link href={`/danh-muc/${category.slug}`}>{category.name}</Link>
+                    {category?.child?.length > 0 && (
+                      <div className="category-child">
+                        {category.child?.map((child) => (
+                          <Link key={child._id} href={`/danh-muc/${child.slug}`}>
+                            {child.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </li>
+                ))}
             </ul>
           </nav>
         </header>
