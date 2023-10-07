@@ -72,6 +72,7 @@ const AdminProduct = () => {
           isActive: true,
           sold: 0,
         });
+        setListImg([{ id: uuid(), value: "" }]);
       })
       .catch((err) => {
         console.error(err);
@@ -106,7 +107,7 @@ const AdminProduct = () => {
                     key={listImg[index]?.id}
                     value={listImg[index]?.value}
                     onChange={(e) => {
-                      if (e.target.value === "") {
+                      if (e.target.value === "" && listImg.length > 1) {
                         const list = [...listImg.slice(0, index), ...listImg.slice(index + 1)];
                         setListImg(list);
                         return;
@@ -118,7 +119,7 @@ const AdminProduct = () => {
                     placeholder="Link ảnh"
                   />
                 ))}
-                {listImg[listImg.length - 1].value !== "" && listImg.length < 5 && (
+                {listImg[listImg.length - 1]?.value !== "" && listImg.length < 5 && (
                   <button
                     className="button-more-link"
                     onClick={() => {
