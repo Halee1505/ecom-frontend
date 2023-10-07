@@ -1,9 +1,9 @@
 import AddToCart from "@/components/addToCart";
+import ImageDetail from "@/components/imageDetail";
 import ProductItem from "@/components/productItem";
 import { Product } from "@/model/product";
 import { formatNumberWithCommas } from "@/utils/formatMoney";
 import Link from "next/link";
-
 const CategoryPage = async ({ params }: { params: { slug: string } }) => {
   const product: Product = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/${params.slug}`, {
     next: {
@@ -28,12 +28,13 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <div className="product-page">
       <div className="product-content">
-        <img src={product.image} alt={product.name} />
+        <ImageDetail product={product} />
         <div className="product-detail">
           <h1>{product.name}</h1>
           <span>Đã bán: {product.sold}</span>
           <p className="price">{formatNumberWithCommas(product.price)} đ</p>
           <AddToCart product={product} />
+          ImageDetail
         </div>
       </div>
       <div className="description">
@@ -45,7 +46,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
           <h3>Sản phẩm cùng danh mục</h3>
           {productsSameCategory.map((product) => (
             <Link href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
-              <img src={product.image} alt={product.name} />
+              <img src={product.image.split(",")[0]} alt={product.name} />
               <div>
                 <h2>{product.name}</h2>
                 <span>

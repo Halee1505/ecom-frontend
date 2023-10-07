@@ -1,7 +1,8 @@
 import { Category } from "@/model/category";
 import { Product } from "@/model/product";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
+import { uuid } from "uuidv4";
 
 const getCategory = async () => {
   const categories: Category[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/sub-categories`, {
@@ -33,6 +34,9 @@ const AdminProduct = () => {
     isActive: true,
     sold: 0,
   });
+
+  const [listImg, setListImg] = useState<{ id: string; value: string }[]>([{ id: uuid(), value: "" }]);
+
   useEffect(() => {
     (async () => {
       const categories: Category[] = await getCategory();
@@ -47,7 +51,13 @@ const AdminProduct = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(products),
+      body: JSON.stringify({
+        ...products,
+        image: listImg
+          .filter((img) => img.value !== "")
+          .map((img) => img.value)
+          .join(","),
+      }),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -88,16 +98,39 @@ const AdminProduct = () => {
             </tr>
             <tr>
               <td>Hình ảnh</td>
-              <td>
-                <input
-                  id="link-input"
-                  type="text"
-                  placeholder="Link hình ảnh"
-                  onChange={(e) => {
-                    setProducts({ ...products, image: e.target.value });
-                  }}
-                  value={products?.image}
-                />
+
+              <td className="img-link">
+                {new Array(listImg.length).fill(0).map((_, index) => (
+                  <input
+                    className="link-input"
+                    key={listImg[index]?.id}
+                    value={listImg[index]?.value}
+                    onChange={(e) => {
+                      if (e.target.value === "") {
+                        const list = [...listImg.slice(0, index), ...listImg.slice(index + 1)];
+                        setListImg(list);
+                        return;
+                      }
+                      const list = [...listImg];
+                      list[index].value = e.target.value;
+                      setListImg(list);
+                    }}
+                    placeholder="Link ảnh"
+                  />
+                ))}
+                {listImg[listImg.length - 1].value !== "" && listImg.length < 5 && (
+                  <button
+                    className="button-more-link"
+                    onClick={() => {
+                      if (listImg.length > 5) return;
+                      if (listImg[listImg.length - 1].value === "") return;
+
+                      setListImg([...listImg, { id: uuid(), value: "" }]);
+                    }}
+                  >
+                    Thêm
+                  </button>
+                )}
               </td>
             </tr>
             <tr>
@@ -195,7 +228,13 @@ const AdminProduct = () => {
             </tr>
           </tbody>
         </table>
-        <label htmlFor="link-input">{products?.image && <img src={products?.image} alt="" />}</label>
+        <label htmlFor="link-input">
+          {listImg
+            .filter((img) => img.value !== "")
+            .map((img) => (
+              <img src={img.value} key={img.id} alt="" />
+            ))}
+        </label>
       </div>
       <div>
         <button
