@@ -80,18 +80,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <nav>
             <ul>
               <li key={0}>
-                <a href={`/`} className="home">
+                <Link href={`/`} className="home">
                   TRANG CHỦ
-                </a>
+                </Link>
               </li>
               {categories.map((category) => (
                 <li key={category._id} className="category-item">
-                  <a href={`/danh-muc/${category.slug}`}>{category.name}</a>
+                  <Link href={`/danh-muc/${category.slug}`}>{category.name}</Link>
                   <div className="category-child">
                     {category.child?.map((child) => (
-                      <a key={child._id} href={`/danh-muc/${child.slug}`}>
+                      <Link key={child._id} href={`/danh-muc/${child.slug}`}>
                         {child.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </li>
@@ -109,7 +109,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 <li className="fooer-phone">
                   <label className="mr5">Phone: </label>
                   <span>
-                    <a href={`${process.env.NEXT_PUBLIC_HOTLINE}`}>{process.env.NEXT_PUBLIC_HOTLINE}</a>
+                    <Link href={`${process.env.NEXT_PUBLIC_HOTLINE}`}>{process.env.NEXT_PUBLIC_HOTLINE}</Link>
                   </span>
                 </li>
                 <li className="footer-email">
@@ -123,33 +123,33 @@ export default async function RootLayout({ children }: { children: React.ReactNo
               <h3 className="">Chính sách hỗ trợ:</h3>
               <ul className="footer-list-menu">
                 <li>
-                  <a href="/search" title="Tìm kiếm">
+                  <Link href="/search" title="Tìm kiếm">
                     Tìm kiếm
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
-                  <a href="/pages/about-us" title="Giới thiệu">
+                  <Link href="/pages/about-us" title="Giới thiệu">
                     Giới thiệu
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
-                  <a href="/pages/chinh-sach-doi-tra" title="Chính sách đổi trả">
+                  <Link href="/pages/chinh-sach-doi-tra" title="Chính sách đổi trả">
                     Chính sách đổi trả
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
-                  <a href="/pages/chinh-sach-bao-mat" title="Chính sách bảo mật">
+                  <Link href="/pages/chinh-sach-bao-mat" title="Chính sách bảo mật">
                     Chính sách bảo mật
-                  </a>
+                  </Link>
                 </li>
 
                 <li>
-                  <a href="/pages/dieu-khoan-dich-vu" title="Điều khoản dịch vụ">
+                  <Link href="/pages/dieu-khoan-dich-vu" title="Điều khoản dịch vụ">
                     Điều khoản dịch vụ
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

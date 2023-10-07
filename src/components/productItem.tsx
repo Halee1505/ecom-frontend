@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ProductItem = ({ product }: { product: Product }) => {
   return (
-    <a className="product-item" href={`/san-pham/${product.slug}`} title={product.name}>
+    <Link className="product-item" href={`/san-pham/${product.slug}`} title={product.name}>
       <img src={product.image} alt={product.name} />
       <div className="product-info">
         <h3>{product.name}</h3>
@@ -15,7 +15,7 @@ const ProductItem = ({ product }: { product: Product }) => {
           <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

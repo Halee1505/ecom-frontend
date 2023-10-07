@@ -15,17 +15,16 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
       console.error(err);
       return null;
     });
-  const productsSameCategory: Product[] = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${product.category?.slug}?limit=4`,
-    {
-      next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
-    }
-  )
-    .then((res) => res.json())
-    .catch((err) => {
-      console.error(err);
-      return [];
-    });
+  const productsSameCategory: Product[] = product.category.slug
+    ? await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${product.category?.slug}?limit=4`, {
+        next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
+      })
+        .then((res) => res.json())
+        .catch((err) => {
+          console.error(err);
+          return [];
+        })
+    : [];
   return (
     <div className="product-page">
       <div className="product-content">
@@ -46,7 +45,7 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
           <h3>Sản phẩm cùng danh mục</h3>
           <div className="related">
             {productsSameCategory.map((product) => (
-              <a href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
+              <Link href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
                 <img src={product.image} alt={product.name} />
                 <div>
                   <h2>{product.name}</h2>
@@ -54,15 +53,15 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
                     {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
                   </span>
                 </div>
-              </a>
+              </Link>
             ))}
-            <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
+            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
           </div>
           <div className="mobile-related">
             {productsSameCategory.map((product) => (
               <ProductItem key={product._id} product={product} />
             ))}
-            <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
+            <Link href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
           </div>
         </div>
       </div>
