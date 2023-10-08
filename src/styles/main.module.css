@@ -68,13 +68,13 @@
     stroke: #fff;
 }
 
-.user>svg {
+.user>a>svg {
     width: 35px;
     height: 35px;
     fill: #fff;
 }
 
-.user>svg * {
+.user>a>svg * {
     width: 35px;
     height: 35px;
     fill: #fff;

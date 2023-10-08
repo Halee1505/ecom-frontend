@@ -14,3 +14,8 @@ export interface Product {
   createdAt?: Date;
   updatedAt?: Date;
 }
+
+export interface Cart {
+  product: Product;
+  quantity: number;
+}

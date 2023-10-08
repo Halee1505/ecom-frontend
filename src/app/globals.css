@@ -119,5 +119,8 @@ button:active {
 @import url("@/styles/product-item.module.css");
 @import url("@/styles/delete-btn.module.css");
 @import url("@/styles/product-page.module.css");
+@import url("@/styles/account.module.css");
 @import url("@/styles/admin.module.css");
+@import url("@/styles/cart.module.css");
+@import url("@/styles/profile.module.css");
 @import url("@/styles/media.module.css");

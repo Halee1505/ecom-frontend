@@ -25,7 +25,7 @@ nav>ul>li {
     color: black;
     list-style: none;
     padding: 1vw 16px;
-    border: 1px solid #eee;
+    /* border: 1px solid #eee; */
 }
 
 nav>ul>li>a {
