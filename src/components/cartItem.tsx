@@ -42,6 +42,7 @@ const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
           alert("Thêm vào giỏ hàng thất bại");
           return;
         }
+        onChange();
       })
       .catch((err) => {
         console.error(err);
