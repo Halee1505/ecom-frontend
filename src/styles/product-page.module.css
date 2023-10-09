@@ -59,6 +59,8 @@
 
 .list-img>img.selected {
     opacity: 1;
+    background-color: #fff;
+
 }
 
 .product-detail {
@@ -90,7 +92,8 @@
 .product-detail .price {
 
     color: #ff0000;
-    font-size: 30px;
+    font-size: 22px;
+    font-weight: 600;
     margin-right: 10px;
 }
 
@@ -303,4 +306,9 @@
 
 .mobile-related {
     display: none;
+}
+
+.sold-out-text {
+    font-size: 14px;
+    color: var(--primary-color);
 }

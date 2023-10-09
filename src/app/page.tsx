@@ -3,7 +3,7 @@ import { Product } from "@/model/product";
 import { useState } from "react";
 
 export default async function Home() {
-  const products: Product[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products?limit=13`, {
+  const products: Product[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products?limit=12`, {
     next: {
       revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE),
     },

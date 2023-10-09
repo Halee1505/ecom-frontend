@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AddToCart from "./addToCart";
 import { Cart } from "@/model/product";
 import { formatNumberWithCommas } from "@/utils/formatMoney";
 import DeleteButton from "./deleteBtn";
 import { Profile } from "@/app/profile/page";
 import { usePathname } from "next/navigation";
+import { debounce } from "@/utils/func";
 
 const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
   const [quantity, setQuantity] = useState(cart.quantity);
@@ -19,8 +20,7 @@ const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
     }
   }, [pathName]);
   const [ready, setReady] = useState(false);
-
-  const addToCart = async () => {
+  const addToCart = async (quantity: number, cart: Cart, profile: Profile | null) => {
     if (!profile) {
       alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng");
       return;
@@ -55,8 +55,15 @@ const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
       setReady(true);
       return;
     }
-    addToCart();
+    handleAddToCart(quantity, cart, profile);
   }, [quantity]);
+
+  const handleAddToCart = useCallback(
+    debounce((quantity: number, cart: Cart, profile: Profile | null) => {
+      addToCart(quantity, cart, profile);
+    }, 500),
+    []
+  );
 
   return (
     <div className="cart-item">

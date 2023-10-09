@@ -1,5 +1,8 @@
 "use client";
 
+import CartItem from "@/components/cartItem";
+import { Order } from "@/model/category";
+import { formatNumberWithCommas } from "@/utils/formatMoney";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -17,73 +20,90 @@ export interface Profile {
   _id: string;
 }
 
+const defaultProfile = {
+  createdAt: "",
+  email: "",
+  firstName: "",
+  isActive: false,
+  lastName: "",
+  password: "",
+  address: "",
+  phone: "",
+  role: "",
+  updatedAt: "",
+  _id: "",
+};
+
 const Profile = () => {
-  const [profile, setProfile] = useState<Profile>({
-    createdAt: "",
-    email: "",
-    firstName: "",
-    isActive: false,
-    lastName: "",
-    password: "",
-    address: "",
-    phone: "",
-    role: "",
-    updatedAt: "",
-    _id: "",
-  });
-  const [curProfile, setCurProfile] = useState<Profile>({
-    createdAt: "",
-    email: "",
-    firstName: "",
-    isActive: false,
-    lastName: "",
-    password: "",
-    address: "",
-    phone: "",
-    role: "",
-    updatedAt: "",
-    _id: "",
-  });
+  const [profile, setProfile] = useState<Profile>(defaultProfile);
+  const [curProfile, setCurProfile] = useState<Profile>(defaultProfile);
   const pathName = usePathname();
   useEffect(() => {
     const profile = localStorage.getItem("PROFILE");
     if (profile) {
       setProfile({
-        createdAt: "",
-        email: "",
-        firstName: "",
-        isActive: false,
-        lastName: "",
-        password: "",
-        address: "",
-        phone: "",
-        role: "",
-        updatedAt: "",
-        _id: "",
+        ...defaultProfile,
         ...JSON.parse(profile),
       });
       setCurProfile({
-        createdAt: "",
-        email: "",
-        firstName: "",
-        isActive: false,
-        lastName: "",
-        password: "",
-        address: "",
-        phone: "",
-        role: "",
-        updatedAt: "",
-        _id: "",
+        ...defaultProfile,
         ...JSON.parse(profile),
       });
     } else {
       window.location.href = "/dang-nhap";
     }
   }, [pathName]);
+
+  const [orders, setOrders] = useState<Order[]>([]);
+
+  useEffect(() => {
+    const getOrders = async () => {
+      if (profile._id === "") {
+        return;
+      }
+      await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/orders/${profile._id}`)
+        .then((res) => res.json())
+        .then((res) => {
+          if (res?.message) {
+            alert("Lấy đơn hàng thất bại");
+            return;
+          }
+          setOrders(res);
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("Lấy đơn hàng thất bại");
+        });
+    };
+    getOrders();
+  }, [profile]);
+
   return (
     <div className="profile">
-      <div className="profile-content">
-        <table>
+      <div className="order-content">
+        <h2>Danh sách đơn hàng</h2>
+        {orders.map((order) => (
+          <div className="order" key={order._id}>
+            <div className="order-items">
+              {order.products.map((product) => (
+                <div className="order-item" key={product.product._id}>
+                  <img src={product.product.image.split(",")[0]} alt="" />
+                  <div>
+                    <h3>
+                      <a href={`/san-pham/${product.product.slug}`}>{product.product.name}</a>
+                    </h3>
+                    <p>{formatNumberWithCommas(product.product.price)}đ</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="price">Tổng tiền: {formatNumberWithCommas(order.total)} đ</p>
+          </div>
+        ))}
+      </div>
+      <div className="profile-info">
+        <h2>Thông tin cá nhân</h2>
+        <table className="profile-content">
           <tbody>
             <tr>
               <td>Họ</td>

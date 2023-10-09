@@ -119,28 +119,37 @@ nav>ul>li>a:hover {
 }
 
 .pagination {
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 10px;
+    width: max-content;
+    max-width: 200px;
+    height: 35px;
     padding: 0px 20px;
+    margin: 0 auto;
+    margin-right: 20px;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+    scroll-snap-type: x mandatory;
+
 
 }
 
 .pagination a {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
     height: 35px;
     width: 35px;
+    scroll-snap-align: left;
     border: 1px solid #eee;
     border-radius: 10px;
+    margin-right: 10px;
 }
 
 .pagination a.active {
     color: #fff;
     background-color: var(--primary-color);
+    scroll-snap-align: center;
+
 }
 
 .category-item {

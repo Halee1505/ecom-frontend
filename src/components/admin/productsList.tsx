@@ -3,6 +3,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import ProductItem from "../productItem";
 import Link from "next/link";
+import DeleteButton from "../deleteBtn";
 
 const getListProducts = async (limit: number, offset: number) => {
   const products: Product[] = await fetch(
@@ -57,7 +58,7 @@ const ProductList = () => {
     <div className="admin-products">
       <div className="product-list">
         {products?.map((product) => (
-          <ProductItem key={product._id} product={product} />
+          <ProductItem product={product} key={product._id} />
         ))}
       </div>
       <div className="pagination">

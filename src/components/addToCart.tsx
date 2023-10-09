@@ -45,6 +45,9 @@ const AddToCart = ({ product }: { product: Product }) => {
         alert("Thêm vào giỏ hàng thất bại");
       });
   };
+  if (product.inventory === 0) {
+    return <div className="sold-out-text">Sản phẩm này tạm thời hết hàng</div>;
+  }
 
   return (
     <div>
@@ -80,7 +83,15 @@ const AddToCart = ({ product }: { product: Product }) => {
         >
           Thêm vào giỏ hàng
         </button>
-        <button>Mua ngay</button>
+        <button
+          onClick={() => {
+            addToCart().then(() => {
+              window.location.href = "/gio-hang";
+            });
+          }}
+        >
+          Mua ngay
+        </button>
       </div>
     </div>
   );

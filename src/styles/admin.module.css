@@ -1,11 +1,14 @@
 .admin {
+    width: 100%
+}
+
+.admin>* {
     width: 900px;
     margin: 0px calc(50vw - 450px);
     margin-bottom: 20px;
 }
 
 .admin-menu {
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +66,6 @@
 
 
 .admin-category {
-    width: 100%;
     padding: 10px 50px;
 }
 
@@ -258,4 +260,66 @@
     margin: 5px auto;
     display: block;
     transition: all 0.3s ease-in-out;
+}
+
+.order-list {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 700px;
+
+}
+
+.order-list .order {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.admin-order {
+    display: flex;
+    gap: 20px;
+    width: max-content;
+    margin: 0 auto;
+}
+
+.selected-order {
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid var(--primary-color);
+    height: max-content;
+    padding: 10px;
+    border-radius: 4px;
+
+}
+
+.selected-order * {
+    color: var(--primary-color);
+}
+
+.admin-order em {
+    font-size: 14px;
+    box-sizing: content-box;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.order-user {
+    background-color: var(--primary-color);
+    border-radius: 4px;
+    padding: 6px 10px;
+    line-height: 1.3em;
+}
+
+.order-user * {
+    color: #fff;
+    font-size: 14px;
+}
+
+.note {
+    margin-top: 20px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 0.89em;
 }

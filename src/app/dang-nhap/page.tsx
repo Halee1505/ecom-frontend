@@ -38,7 +38,11 @@ const Login = () => {
         }
         localStorage.setItem("PROFILE", JSON.stringify(res));
         alert("Đăng nhập thành công");
-        router.push("/");
+        if (res.role === "ADMIN") {
+          router.push("/admin");
+        } else {
+          router.push("/");
+        }
       })
       .catch((err) => {
         console.error(err);
