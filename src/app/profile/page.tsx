@@ -80,27 +80,29 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      <div className="order-content">
-        <h2>Danh sách đơn hàng</h2>
-        {orders.map((order) => (
-          <div className="order" key={order._id}>
-            <div className="order-items">
-              {order.products.map((product) => (
-                <div className="order-item" key={product.product._id}>
-                  <img src={product.product.image.split(",")[0]} alt="" />
-                  <div>
-                    <h3>
-                      <a href={`/san-pham/${product.product.slug}`}>{product.product.name}</a>
-                    </h3>
-                    <p>{formatNumberWithCommas(product.product.price)}đ</p>
+      {profile?.role === "USER" && (
+        <div className="order-content">
+          <h2>Danh sách đơn hàng</h2>
+          {orders.map((order) => (
+            <div className="order" key={order._id}>
+              <div className="order-items">
+                {order.products.map((product) => (
+                  <div className="order-item" key={product.product._id}>
+                    <img src={product.product.image.split(",")[0]} alt="" />
+                    <div>
+                      <h3>
+                        <a href={`/san-pham/${product.product.slug}`}>{product.product.name}</a>
+                      </h3>
+                      <p>{formatNumberWithCommas(product.product.price)}đ</p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
+              <p className="price">Tổng tiền: {formatNumberWithCommas(order.total)} đ</p>
             </div>
-            <p className="price">Tổng tiền: {formatNumberWithCommas(order.total)} đ</p>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
       <div className="profile-info">
         <h2>Thông tin cá nhân</h2>
         <table className="profile-content">
@@ -166,39 +168,50 @@ const Profile = () => {
           >
             Đăng xuất
           </button>
-          {Object.keys(profile).some(
-            (key: string) =>
-              (profile as unknown as Record<string, unknown>)[key as keyof typeof profile] !==
-              (curProfile as unknown as Record<string, unknown>)[key as keyof typeof curProfile]
-          ) && (
+          {profile?.role === "ADMIN" ? (
             <button
               className="primary"
               onClick={() => {
-                fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/users/${profile._id}`, {
-                  method: "PUT",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(profile),
-                })
-                  .then((res) => res.json())
-                  .then((res) => {
-                    if (res.message) {
-                      alert("Cập nhật thất bại");
-                      return;
-                    }
-                    localStorage.setItem("PROFILE", JSON.stringify(profile));
-                    alert("Cập nhật thành công");
-                    window.location.reload();
-                  })
-                  .catch((err) => {
-                    console.error(err);
-                    alert("Cập nhật thất bại");
-                  });
+                window.location.href = "/admin";
               }}
             >
-              Cập nhật
+              Tới trang quản lý
             </button>
+          ) : (
+            Object.keys(profile).some(
+              (key: string) =>
+                (profile as unknown as Record<string, unknown>)[key as keyof typeof profile] !==
+                (curProfile as unknown as Record<string, unknown>)[key as keyof typeof curProfile]
+            ) && (
+              <button
+                className="primary"
+                onClick={() => {
+                  fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/users/${profile._id}`, {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(profile),
+                  })
+                    .then((res) => res.json())
+                    .then((res) => {
+                      if (res.message) {
+                        alert("Cập nhật thất bại");
+                        return;
+                      }
+                      localStorage.setItem("PROFILE", JSON.stringify(profile));
+                      alert("Cập nhật thành công");
+                      window.location.reload();
+                    })
+                    .catch((err) => {
+                      console.error(err);
+                      alert("Cập nhật thất bại");
+                    });
+                }}
+              >
+                Cập nhật
+              </button>
+            )
           )}
         </div>
       </div>
