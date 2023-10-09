@@ -323,3 +323,12 @@
     padding: 10px;
     font-size: 0.89em;
 }
+
+.back-btn svg {
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 0px solid #636363;
+    margin-top: 10px;
+    cursor: pointer;
+}

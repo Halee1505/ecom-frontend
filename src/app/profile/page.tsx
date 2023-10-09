@@ -93,7 +93,9 @@ const Profile = () => {
                       <h3>
                         <a href={`/san-pham/${product.product.slug}`}>{product.product.name}</a>
                       </h3>
-                      <p>{formatNumberWithCommas(product.product.price)}đ</p>
+                      <p>
+                        {formatNumberWithCommas(product.product.price)}đ x {product.quantity}
+                      </p>
                     </div>
                   </div>
                 ))}
