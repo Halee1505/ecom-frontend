@@ -85,6 +85,10 @@ const Cart = () => {
       alert("Vui lòng đăng nhập để thanh toán");
       return;
     }
+    if (!profile.address || !profile.phone || !profile.firstName || !profile.lastName) {
+      alert("Vui lòng điền đầy đủ thông tin cá nhân");
+      return;
+    }
     fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/checkout/${profile._id}`, {
       method: "POST",
       headers: {
