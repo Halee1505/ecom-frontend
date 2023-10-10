@@ -28,6 +28,7 @@ export interface Order {
   products: {
     product: Product;
     quantity: number;
+    classify: string;
   }[];
   total: number;
   note: string;

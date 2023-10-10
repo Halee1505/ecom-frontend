@@ -8,8 +8,6 @@ const ProductItem = ({ product }: { product: Product }) => {
       <img src={product.image.split(",")[0]} alt={product.name} />
       <div className="product-info">
         <h3>{product.name}</h3>
-        <p>Đã bán: {product.sold}</p>
-
         <div>
           <p className="price">{formatNumberWithCommas(product.price)}đ</p>
           <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>

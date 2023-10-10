@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 const AddToCart = ({ product }: { product: Product }) => {
   const [quantity, setQuantity] = useState(1);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [classify, setClassify] = useState<string | null>(null);
   const pathName = usePathname();
   useEffect(() => {
     const profile = localStorage.getItem("PROFILE");
@@ -20,6 +21,10 @@ const AddToCart = ({ product }: { product: Product }) => {
       alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng");
       return;
     }
+    if (product.classify?.split(",").length > 1 && !classify) {
+      alert("Vui lòng chọn phân loại sản phẩm");
+      return;
+    }
 
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/add-to-cart/${profile._id}`, {
       method: "POST",
@@ -29,6 +34,7 @@ const AddToCart = ({ product }: { product: Product }) => {
       body: JSON.stringify({
         product: product,
         quantity,
+        classify,
         addMore: true,
       }),
     })
@@ -45,9 +51,6 @@ const AddToCart = ({ product }: { product: Product }) => {
         alert("Thêm vào giỏ hàng thất bại");
       });
   };
-  if (product.inventory === 0) {
-    return <div className="sold-out-text">Sản phẩm này tạm thời hết hàng</div>;
-  }
 
   return (
     <div>
@@ -65,16 +68,31 @@ const AddToCart = ({ product }: { product: Product }) => {
           <span>{quantity}</span>
           <button
             onClick={() => {
-              if (quantity < product.inventory) {
-                setQuantity(quantity + 1);
-              }
+              setQuantity(quantity + 1);
             }}
           >
             +
           </button>
         </div>
-        <span>Tồn kho: {product.inventory}</span>
       </div>
+      {product.classify?.split(",").length > 1 && (
+        <div className="classify">
+          <strong>Phân loại </strong>
+          <div>
+            {product.classify?.split(",").map((cls) => (
+              <button
+                key={cls}
+                className={cls === classify ? "selected" : ""}
+                onClick={() => {
+                  setClassify(cls);
+                }}
+              >
+                <label>{cls}</label>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="cart">
         <button
           onClick={() => {

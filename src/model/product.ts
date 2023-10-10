@@ -6,10 +6,9 @@ export interface Product {
   image: string;
   slug: string;
   category: Category;
+  classify: string;
   description: string;
   price: number;
-  inventory: number;
-  sold: number;
   isActive: Boolean;
   createdAt?: Date;
   updatedAt?: Date;
@@ -18,4 +17,5 @@ export interface Product {
 export interface Cart {
   product: Product;
   quantity: number;
+  classify: string;
 }

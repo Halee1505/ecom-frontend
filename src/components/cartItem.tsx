@@ -33,6 +33,7 @@ const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
       body: JSON.stringify({
         product: cart.product,
         quantity,
+
         addMore: false,
       }),
     })
@@ -73,6 +74,7 @@ const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
           <a href={`/san-pham/${cart.product.slug}`}>{cart.product.name}</a>
         </h3>
         <p>{formatNumberWithCommas(cart.product.price)}đ</p>
+        {cart.classify && <p>Phân loại: {cart.classify}</p>}
         <div>
           <div className="button-box">
             <div>

@@ -31,7 +31,6 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
         <ImageDetail product={product} />
         <div className="product-detail">
           <h1>{product.name}</h1>
-          <span>Đã bán: {product.sold}</span>
           <p className="price">{formatNumberWithCommas(product.price)} đ</p>
           <AddToCart product={product} />
         </div>

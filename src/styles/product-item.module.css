@@ -44,7 +44,7 @@
 }
 
 .product-item .price {
-    font-size: 14px;
+    font-size: 15px;
     color: #ff0000;
     font-weight: 500;
     display: inline-block;
@@ -52,7 +52,7 @@
 }
 
 .product-item del {
-    font-size: 11px;
+    font-size: 14px;
 
 }
 

@@ -29,10 +29,9 @@ const AdminProduct = () => {
     slug: "",
     category: null as unknown as Category,
     price: 0,
-    inventory: 0,
     description: "",
+    classify: "",
     isActive: true,
-    sold: 0,
   });
 
   const [listImg, setListImg] = useState<{ id: string; value: string }[]>([{ id: uuid(), value: "" }]);
@@ -49,25 +48,31 @@ const AdminProduct = () => {
     if (
       !products.name ||
       !products.price ||
-      !products.inventory ||
       !products.description ||
-      (listImg.length === 1 && listImg[0]?.value == "")
+      (listImg.length === 1 && listImg[0]?.value == "") ||
+      (classify.length === 1 && classify[0]?.value == "")
     ) {
       alert("Vui lòng điền đầy đủ thông tin");
       return;
     }
+
+    const NewProduct = {
+      ...products,
+      image: listImg
+        .filter((img) => img.value !== "")
+        .map((img) => img.value)
+        .join(","),
+      classify: classify
+        .filter((classify) => classify.value !== "")
+        .map((classify) => classify.value)
+        .join(","),
+    };
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        ...products,
-        image: listImg
-          .filter((img) => img.value !== "")
-          .map((img) => img.value)
-          .join(","),
-      }),
+      body: JSON.stringify(NewProduct),
     })
       .then((res) => res.json())
       .then((res) => {
@@ -77,17 +82,19 @@ const AdminProduct = () => {
           slug: "",
           category: categories[0],
           price: 0,
-          inventory: 0,
           description: "",
           isActive: true,
-          sold: 0,
+          classify: "",
         });
         setListImg([{ id: uuid(), value: "" }]);
+        setClassify([{ id: uuid(), value: "" }]);
       })
       .catch((err) => {
         console.error(err);
       });
   };
+
+  const [classify, setClassify] = useState<{ id: string; value: string }[]>([{ id: uuid(), value: "" }]);
 
   return (
     <div className="admin-product-overlay">
@@ -145,6 +152,42 @@ const AdminProduct = () => {
               </td>
             </tr>
             <tr>
+              <td>Phân loại</td>
+
+              <td className="img-link">
+                {new Array(classify.length).fill(0).map((_, index) => (
+                  <input
+                    className="link-input"
+                    key={classify[index]?.id}
+                    value={classify[index]?.value}
+                    onChange={(e) => {
+                      if (e.target.value === "" && classify.length > 1) {
+                        const list = [...classify.slice(0, index), ...classify.slice(index + 1)];
+                        setClassify(list);
+                        return;
+                      }
+                      const list = [...classify];
+                      list[index].value = e.target.value;
+                      setClassify(list);
+                    }}
+                    placeholder="Phân loại"
+                  />
+                ))}
+                {classify[classify.length - 1]?.value !== "" && (
+                  <button
+                    className="button-more-link"
+                    onClick={() => {
+                      if (classify[classify.length - 1].value === "") return;
+
+                      setClassify([...classify, { id: uuid(), value: "" }]);
+                    }}
+                  >
+                    Thêm
+                  </button>
+                )}
+              </td>
+            </tr>
+            <tr>
               <td>Danh mục</td>
               <td>
                 <select
@@ -175,18 +218,6 @@ const AdminProduct = () => {
                     setProducts({ ...products, price: Number(e.target.value) });
                   }}
                   value={products?.price}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>Số lượng</td>
-              <td>
-                <input
-                  type="number"
-                  onChange={(e) => {
-                    setProducts({ ...products, inventory: Number(e.target.value) });
-                  }}
-                  value={products?.inventory}
                 />
               </td>
             </tr>
@@ -256,10 +287,9 @@ const AdminProduct = () => {
               slug: "",
               category: categories[0],
               price: 0,
-              inventory: 0,
               description: "",
               isActive: true,
-              sold: 0,
+              classify: "",
             });
           }}
         >

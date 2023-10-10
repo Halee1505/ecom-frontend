@@ -81,6 +81,8 @@ const OrderList = () => {
                     <img src={product.product.image.split(",")[0]} alt="" />
                     <div>
                       <h3>{product.product.name}</h3>
+                      {product.classify && <p>Phân loại: {product.classify}</p>}
+
                       <p>
                         {formatNumberWithCommas(product.product.price)}đ x {product.quantity}
                       </p>

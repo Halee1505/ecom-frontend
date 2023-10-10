@@ -126,11 +126,15 @@
 .order-item h3 {
     width: max-content;
     max-width: 400px;
-    font-size: 14px;
+    font-size: 15px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 
+}
+
+.order-item p {
+    font-size: 13px;
 }
 
 .order-item {
