@@ -51,15 +51,15 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
                   {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
                 </span>
               </div>
-            </Link>
+            </a>
           ))}
-          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
+          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
         </div>
         <div className="mobile-related">
           {productsSameCategory.map((product) => (
             <ProductItem key={product._id} product={product} />
           ))}
-          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</Link>
+          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
         </div>
       </div>
     </div>

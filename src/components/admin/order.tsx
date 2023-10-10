@@ -104,7 +104,7 @@ const OrderList = () => {
                 className={index + 1 === page ? "active" : ""}
               >
                 {index + 1}
-              </Link>
+              </a>
             ))}
         </div>
       </div>

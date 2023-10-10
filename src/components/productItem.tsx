@@ -13,7 +13,7 @@ const ProductItem = ({ product }: { product: Product }) => {
           <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 
