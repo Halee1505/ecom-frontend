@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const ProductItem = ({ product }: { product: Product }) => {
   return (
-    <Link className="product-item" href={`/san-pham/${product.slug}`} title={product.name}>
+    <a className="product-item" href={`/san-pham/${product.slug}`} title={product.name}>
       <img src={product.image.split(",")[0]} alt={product.name} />
       <div className="product-info">
         <h3>{product.name}</h3>

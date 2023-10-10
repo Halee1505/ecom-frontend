@@ -52,7 +52,7 @@ const CategoryPage = async ({
           {Array(Math.ceil(productsCount.count / 8))
             .fill(0)
             .map((_, index) => (
-              <Link
+              <a
                 href={index === 0 ? `/danh-muc/${params.category}` : `/danh-muc/${params.category}?page=${index + 1}`}
                 key={index}
                 className={index + 1 === page ? "active" : ""}

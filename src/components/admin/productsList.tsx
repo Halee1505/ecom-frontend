@@ -65,7 +65,7 @@ const ProductList = () => {
         {Array(Math.ceil(productsCount.count / limit))
           .fill(0)
           .map((_, index) => (
-            <Link
+            <a
               href={index === 0 ? `/admin?content=products` : `/admin?content=products&page=${index + 1}`}
               key={index}
               className={index + 1 === page ? "active" : ""}
