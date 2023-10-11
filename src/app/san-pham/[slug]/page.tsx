@@ -41,7 +41,9 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
       <div className="description">
         <div className="detail-description">
           <h2>Mô tả:</h2>
-          <div dangerouslySetInnerHTML={{ __html: product?.description }}></div>
+          {product?.description && (
+            <div dangerouslySetInnerHTML={{ __html: `<div>${product?.description}</div>` }}></div>
+          )}
         </div>
         <div className="related">
           <h3>Sản phẩm cùng danh mục</h3>
