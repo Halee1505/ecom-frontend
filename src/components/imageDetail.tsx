@@ -7,14 +7,14 @@ const ImageDetail = ({ product }: { product: Product }) => {
   const [selectedImg, setSelectedImg] = useState(0);
   return (
     <div>
-      <img src={product.image.split(",")[selectedImg]} alt={product.name} />
+      <img src={product?.image?.split(",")[selectedImg]} alt={product?.name} />
       <div className="list-img">
-        {product.image.split(",").map((img) => (
+        {product?.image?.split(",").map((img) => (
           <img
             src={img}
-            alt={product.name}
-            className={product.image.split(",").indexOf(img) === selectedImg ? "selected" : ""}
-            onClick={() => setSelectedImg(product.image.split(",").indexOf(img))}
+            alt={product?.name}
+            className={product?.image?.split(",").indexOf(img) === selectedImg ? "selected" : ""}
+            onClick={() => setSelectedImg(product?.image?.split(",").indexOf(img))}
             key={img}
           />
         ))}

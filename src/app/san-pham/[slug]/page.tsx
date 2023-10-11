@@ -15,8 +15,11 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
       console.error(err);
       return null;
     });
-  const productsSameCategory: Product[] = product.category.slug
-    ? await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${product.category?.slug}?limit=4`, {
+  if (!product) {
+    return <div>Không tìm thấy sản phẩm</div>;
+  }
+  const productsSameCategory: Product[] = product?.category?.slug
+    ? await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${product?.category?.slug}?limit=4`, {
         next: { revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE) },
       })
         .then((res) => res.json())
@@ -30,36 +33,36 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
       <div className="product-content">
         <ImageDetail product={product} />
         <div className="product-detail">
-          <h1>{product.name}</h1>
-          <p className="price">{formatNumberWithCommas(product.price)} đ</p>
+          <h1>{product?.name}</h1>
+          <p className="price">{formatNumberWithCommas(product?.price)} đ</p>
           <AddToCart product={product} />
         </div>
       </div>
       <div className="description">
         <div className="detail-description">
           <h2>Mô tả:</h2>
-          <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
+          <div dangerouslySetInnerHTML={{ __html: product?.description }}></div>
         </div>
         <div className="related">
           <h3>Sản phẩm cùng danh mục</h3>
           {productsSameCategory.map((product) => (
-            <a href={`/san-pham/${product.slug}`} title={product.name} key={product._id} className="related-item">
-              <img src={product.image.split(",")[0]} alt={product.name} />
+            <a href={`/san-pham/${product?.slug}`} title={product?.name} key={product?._id} className="related-item">
+              <img src={product?.image.split(",")[0]} alt={product?.name} />
               <div>
-                <h2>{product.name}</h2>
+                <h2>{product?.name}</h2>
                 <span>
-                  {formatNumberWithCommas(product.price)} đ <del>{formatNumberWithCommas(product.price * 1.2)} đ</del>
+                  {formatNumberWithCommas(product?.price)} đ <del>{formatNumberWithCommas(product?.price * 1.2)} đ</del>
                 </span>
               </div>
             </a>
           ))}
-          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
+          <a href={`/danh-muc/${product?.category?.slug}`}>Xem thêm</a>
         </div>
         <div className="mobile-related">
           {productsSameCategory.map((product) => (
-            <ProductItem key={product._id} product={product} />
+            <ProductItem key={product?._id} product={product} />
           ))}
-          <a href={`/danh-muc/${product.category.slug}`}>Xem thêm</a>
+          <a href={`/danh-muc/${product?.category?.slug}`}>Xem thêm</a>
         </div>
       </div>
     </div>
