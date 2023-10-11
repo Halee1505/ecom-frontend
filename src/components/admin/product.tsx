@@ -59,7 +59,6 @@ const AdminProduct = () => {
       alert("Vui lòng điền đầy đủ thông tin");
       return;
     }
-
     const NewProduct = {
       ...products,
       image: listImg
@@ -69,7 +68,7 @@ const AdminProduct = () => {
       classify: JSON.stringify(
         classify
           .filter((classify) => classify.value !== "")
-          .filter((classify) => classify.child.length > 0)
+          .filter((classify) => !(classify.child.length == 1 && classify.child[0].value == ""))
           .map((classify) => ({
             name: classify.value,
             child: classify.child.filter((child) => child.value !== "").map((child) => ({ name: child.value })),
