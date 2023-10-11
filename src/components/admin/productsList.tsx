@@ -58,7 +58,47 @@ const ProductList = () => {
     <div className="admin-products">
       <div className="product-list">
         {products?.map((product) => (
-          <ProductItem product={product} key={product._id} />
+          <div
+            key={product._id}
+            style={{
+              position: "relative",
+            }}
+          >
+            <ProductItem product={product} />
+            <div
+              style={{
+                position: "absolute",
+                top: "0",
+                right: "0",
+              }}
+            >
+              <DeleteButton
+                propsText="Xóa sản phẩm?"
+                denyText="Huỷ"
+                confirmText="Đồng ý"
+                onConfirm={() => {
+                  fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/${product._id}`, {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  })
+                    .then((res) => res.json())
+                    .then((res) => {
+                      if (res.message) {
+                        alert("Xóa sản phẩm thất bại");
+                        return;
+                      }
+                      window.location.reload();
+                    })
+                    .catch((err) => {
+                      console.error(err);
+                      alert("Xóa sản phẩm thất bại");
+                    });
+                }}
+              />
+            </div>
+          </div>
         ))}
       </div>
       <div className="pagination">

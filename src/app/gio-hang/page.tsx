@@ -124,15 +124,18 @@ const Cart = () => {
           <div className="cart-items">
             <h1>Giỏ hàng</h1>
 
-            {cart.map((item) => (
-              <CartItem
-                key={item.product._id}
-                cart={item}
-                onChange={() => {
-                  setChange(!change);
-                }}
-              />
-            ))}
+            {cart.map(
+              (item) =>
+                item.product && (
+                  <CartItem
+                    key={item.product._id}
+                    cart={item}
+                    onChange={() => {
+                      setChange(!change);
+                    }}
+                  />
+                )
+            )}
             <textarea
               placeholder="Ghi chú"
               value={note}

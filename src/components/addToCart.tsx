@@ -3,11 +3,18 @@ import { Profile } from "@/app/profile/page";
 import { Product } from "@/model/product";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { ClassifyProps } from "./admin/addItem";
 
 const AddToCart = ({ product }: { product: Product }) => {
   const [quantity, setQuantity] = useState(1);
   const [profile, setProfile] = useState<Profile | null>(null);
-  const [classify, setClassify] = useState<string | null>(null);
+  const [classify, setClassify] = useState<
+    {
+      name: string;
+      value: string;
+    }[]
+  >([]);
+
   const pathName = usePathname();
   useEffect(() => {
     const profile = localStorage.getItem("PROFILE");
@@ -21,9 +28,17 @@ const AddToCart = ({ product }: { product: Product }) => {
       alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng");
       return;
     }
-    if (product.classify?.split(",").length > 1 && !classify) {
-      alert("Vui lòng chọn phân loại sản phẩm");
-      return;
+    if (product.classify) {
+      const productClassify = JSON.parse(product.classify);
+
+      if (!Array.isArray(productClassify)) {
+        alert("Thêm vào giỏ hàng thất bại");
+        return;
+      }
+      if (productClassify.length !== classify.length) {
+        alert("Vui lòng chọn đầy đủ phân loại");
+        return;
+      }
     }
 
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/add-to-cart/${profile._id}`, {
@@ -31,10 +46,11 @@ const AddToCart = ({ product }: { product: Product }) => {
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify({
         product: product,
         quantity,
-        classify,
+        classify: JSON.stringify(classify),
         addMore: true,
       }),
     })
@@ -75,20 +91,35 @@ const AddToCart = ({ product }: { product: Product }) => {
           </button>
         </div>
       </div>
-      {product.classify?.split(",").length > 1 && (
+      {product.classify && Array.isArray(JSON.parse(product.classify)) && (
         <div className="classify">
           <strong>Phân loại </strong>
           <div>
-            {product.classify?.split(",").map((cls) => (
-              <button
-                key={cls}
-                className={cls === classify ? "selected" : ""}
-                onClick={() => {
-                  setClassify(cls);
-                }}
-              >
-                <label>{cls}</label>
-              </button>
+            {JSON.parse(product.classify)?.map((cls: { name: string; child: { name: string }[] }) => (
+              <div className="classify-item" key={cls.name}>
+                <label>{cls.name}</label>
+                <div>
+                  {cls.child.map((child: { name: string }) => (
+                    <button
+                      key={child.name}
+                      className={classify.find((c) => c.name === cls.name)?.value === child.name ? "selected" : ""}
+                      onClick={() => {
+                        const newClassify = [...classify];
+                        const index = newClassify.findIndex((c) => c.name === cls.name);
+                        if (index !== -1) {
+                          newClassify[index].value = child.name;
+                          setClassify(newClassify);
+                          return;
+                        }
+                        newClassify.push({ name: cls.name, value: child.name });
+                        setClassify(newClassify);
+                      }}
+                    >
+                      {child.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>

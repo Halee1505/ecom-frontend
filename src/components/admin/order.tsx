@@ -5,6 +5,7 @@ import ProductItem from "../productItem";
 import Link from "next/link";
 import { Order } from "@/model/category";
 import { formatNumberWithCommas } from "@/utils/formatMoney";
+import { uuid } from "uuidv4";
 
 const getListOrders = async (limit: number, offset: number) => {
   const orders: Order[] = await fetch(
@@ -76,19 +77,29 @@ const OrderList = () => {
               }}
             >
               <div className="order-items">
-                {order.products.map((product) => (
-                  <div className="order-item" key={product.product._id}>
-                    <img src={product.product.image.split(",")[0]} alt="" />
-                    <div>
-                      <h3>{product.product.name}</h3>
-                      {product.classify && <p>Phân loại: {product.classify}</p>}
-
-                      <p>
-                        {formatNumberWithCommas(product.product.price)}đ x {product.quantity}
-                      </p>
+                {order.products.map((product) =>
+                  product.product ? (
+                    <div className="order-item" key={product.product._id}>
+                      <img src={product.product.image.split(",")[0]} alt="" />
+                      <div>
+                        <h3>{product.product.name}</h3>
+                        {product.classify && JSON.parse(product.classify).length > 0 && (
+                          <p>
+                            Phân loại:{" "}
+                            {JSON.parse(product.classify)
+                              .map((item: { name: string; value: string }) => item.name + " " + item.value)
+                              .join(", ")}
+                          </p>
+                        )}
+                        <p>
+                          {formatNumberWithCommas(product.product.price)}đ x {product.quantity}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ) : (
+                    <p key={uuid()}>Sản phẩm này đã ngừng kinh doanh</p>
+                  )
+                )}
               </div>
               <p className="price">Tổng tiền: {formatNumberWithCommas(order.total)} đ</p>
             </div>

@@ -3,6 +3,7 @@ import { Product } from "@/model/product";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import { uuid } from "uuidv4";
+import AddItem from "./addItem";
 
 const getCategory = async () => {
   const categories: Category[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/sub-categories`, {
@@ -34,6 +35,9 @@ const AdminProduct = () => {
     isActive: true,
   });
 
+  const [classify, setClassify] = useState<{ id: string; value: string; child: { id: string; value: string }[] }[]>([
+    { id: uuid(), value: "", child: [] },
+  ]);
   const [listImg, setListImg] = useState<{ id: string; value: string }[]>([{ id: uuid(), value: "" }]);
 
   useEffect(() => {
@@ -62,11 +66,16 @@ const AdminProduct = () => {
         .filter((img) => img.value !== "")
         .map((img) => img.value)
         .join(","),
-      classify: classify
-        .filter((classify) => classify.value !== "")
-        .map((classify) => classify.value)
-        .join(","),
+      classify: JSON.stringify(
+        classify
+          .filter((classify) => classify.value !== "")
+          .map((classify) => ({
+            name: classify.value,
+            child: classify.child.filter((child) => child.value !== "").map((child) => ({ name: child.value })),
+          }))
+      ),
     };
+
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products`, {
       method: "POST",
       headers: {
@@ -87,14 +96,12 @@ const AdminProduct = () => {
           classify: "",
         });
         setListImg([{ id: uuid(), value: "" }]);
-        setClassify([{ id: uuid(), value: "" }]);
+        setClassify([{ id: uuid(), value: "", child: [] }]);
       })
       .catch((err) => {
         console.error(err);
       });
   };
-
-  const [classify, setClassify] = useState<{ id: string; value: string }[]>([{ id: uuid(), value: "" }]);
 
   return (
     <div className="admin-product-overlay">
@@ -155,36 +162,7 @@ const AdminProduct = () => {
               <td>Phân loại</td>
 
               <td className="img-link">
-                {new Array(classify.length).fill(0).map((_, index) => (
-                  <input
-                    className="link-input"
-                    key={classify[index]?.id}
-                    value={classify[index]?.value}
-                    onChange={(e) => {
-                      if (e.target.value === "" && classify.length > 1) {
-                        const list = [...classify.slice(0, index), ...classify.slice(index + 1)];
-                        setClassify(list);
-                        return;
-                      }
-                      const list = [...classify];
-                      list[index].value = e.target.value;
-                      setClassify(list);
-                    }}
-                    placeholder="Phân loại"
-                  />
-                ))}
-                {classify[classify.length - 1]?.value !== "" && (
-                  <button
-                    className="button-more-link"
-                    onClick={() => {
-                      if (classify[classify.length - 1].value === "") return;
-
-                      setClassify([...classify, { id: uuid(), value: "" }]);
-                    }}
-                  >
-                    Thêm
-                  </button>
-                )}
+                <AddItem items={classify} setItems={setClassify} />
               </td>
             </tr>
             <tr>
