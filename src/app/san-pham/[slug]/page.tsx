@@ -15,7 +15,8 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
       console.error(err);
       return null;
     });
-  console.log(product);
+  console.log("param", params.slug);
+  console.log("product", product);
   if (!product) {
     return <div>Không tìm thấy sản phẩm</div>;
   }
