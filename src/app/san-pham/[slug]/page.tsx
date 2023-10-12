@@ -11,6 +11,9 @@ const CategoryPage = async ({ params }: { params: { slug: string } }) => {
     },
   })
     .then((res) => res.json())
+    .then((res) => {
+      return res;
+    })
     .catch((err) => {
       console.error(err);
       return null;

@@ -1,9 +1,11 @@
 import ProductItem from "@/components/productItem";
 import { Product } from "@/model/product";
+import { requestOptions } from "@/utils";
 import { useState } from "react";
 
 export default async function Home() {
   const products: Product[] = await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products?limit=12`, {
+    ...requestOptions,
     next: {
       revalidate: Number(process.env.NEXT_PUBLIC_REVALIDATE),
     },
