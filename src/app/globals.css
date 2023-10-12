@@ -81,6 +81,8 @@ body {
 body {
   color: rgb(var(--foreground-rgb));
   background: #fff;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 a {

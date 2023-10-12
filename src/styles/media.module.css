@@ -8,6 +8,9 @@
         gap: 1vw;
     }
 
+    .profile-content input {
+        width: 100%;
+    }
 }
 
 
@@ -49,6 +52,10 @@
         gap: 20px;
     }
 
+    .profile .order {
+        width: 350px !important;
+    }
+
     .product-item {
         height: 260px;
         box-shadow: 0 12px 12px 3px rgb(176 176 176 / 41%);
@@ -63,6 +70,10 @@
     .footer-center {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .profile-content input {
+        width: 100%;
     }
 
     .header>h1 {
@@ -194,6 +205,29 @@
     .term {
         margin: 0px calc(50% - 320px);
         width: 640px;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+
+    }
+
+    .profile .order {
+        width: 450px;
+    }
+
+    .profile .order-item>div * {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .profile .order-item>div>h3 {
+        width: 100%;
+        max-width: 100%;
+        white-space: wrap;
+
     }
 }
 
