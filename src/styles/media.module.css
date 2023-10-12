@@ -65,6 +65,11 @@
         align-items: flex-start;
     }
 
+    .header>h1 {
+        font-size: 22px;
+        white-space: nowrap;
+    }
+
 }
 
 @media (min-width: 580px) and (max-width: 950px) {

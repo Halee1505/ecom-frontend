@@ -114,7 +114,10 @@ export default async function Home() {
         </div>
       </div>
       <div className="slogan">
-        <p>{process.env.NEXT_PUBLIC_BRAND_NAME}</p>
+        <div>
+          <p>{process.env.NEXT_PUBLIC_BRAND_NAME}</p>
+          <p>Chuyên Phân Phối Hàng Công Ty</p>
+        </div>
       </div>
       <div className="product-list">
         {products.map((product) => (
