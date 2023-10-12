@@ -15,9 +15,11 @@ const Header = () => {
 
   return (
     <header className="header">
-      <h1>{process.env.NEXT_PUBLIC_BRAND_NAME}</h1>
+      <h1>
+        <a href="/">{process.env.NEXT_PUBLIC_BRAND_NAME}</a>
+      </h1>
       <div className="user">
-        <a href={profile ? "/gio-hang" : "/dang-nhap"} className="cart">
+        <a href={"/gio-hang"} className="cart">
           <svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 24 24" fill="none">
             <path
               d="M2 3L2.26491 3.0883C3.58495 3.52832 4.24497 3.74832 4.62248 4.2721C5 4.79587 5 5.49159 5 6.88304V9.5C5 12.3284 5 13.7426 5.87868 14.6213C6.75736 15.5 8.17157 15.5 11 15.5H19"
@@ -63,6 +65,13 @@ const Header = () => {
             </g>
           </svg>
         </a>
+        <label htmlFor="menu" className="x">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="800px" height="800px" viewBox="0 -2 28 28">
+            <path d="m2.61 0h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
+            <path d="m2.61 9.39h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
+            <path d="m2.61 18.781h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
+          </svg>
+        </label>
       </div>
     </header>
   );

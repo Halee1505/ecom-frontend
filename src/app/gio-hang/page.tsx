@@ -21,7 +21,7 @@ const Cart = () => {
     updatedAt: "",
     _id: "",
   });
-  const [cart, setCart] = useState<Cart[]>([]); // [Product
+  const [cart, setCart] = useState<Cart[]>([]);
   const pathName = usePathname();
   const [change, setChange] = useState(false);
   const [note, setNote] = useState("");
@@ -34,7 +34,13 @@ const Cart = () => {
 
   useEffect(() => {
     const getCart = async () => {
-      if (profile._id === "") {
+      if (profile._id === "" || !profile._id) {
+        const localCart = localStorage.getItem("CART");
+        if (!localCart) return;
+        const parsedCart = JSON.parse(localCart) as unknown as Cart[];
+        if (parsedCart) {
+          setCart(parsedCart);
+        }
         return;
       }
       await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/cart/${profile._id}`)
@@ -82,7 +88,43 @@ const Cart = () => {
 
   const purchase = async () => {
     if (!profile._id) {
-      alert("Vui lòng đăng nhập để thanh toán");
+      if (!profile.address || !profile.phone || !profile.firstName || !profile.lastName) {
+        alert("Vui lòng điền đầy đủ thông tin cá nhân");
+        return;
+      }
+
+      const cart = localStorage.getItem("CART");
+      if (!cart) return;
+      const parsedCart = JSON.parse(cart) as unknown as Cart[];
+      fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/checkout-anonymous`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          note,
+          products: parsedCart,
+          name: `${profile.firstName} ${profile.lastName}`,
+          total: parsedCart.reduce((total, item) => total + item.product.price * item.quantity, 0),
+          phone: profile.phone,
+          address: profile.address,
+        }),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.message) {
+            alert("Thanh toán thất bại");
+            return;
+          }
+          alert("Thanh toán thành công");
+          setCart([]);
+          localStorage.removeItem("CART");
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("Thanh toán thất bại");
+        });
+
       return;
     }
     if (!profile.address || !profile.phone || !profile.firstName || !profile.lastName) {
@@ -208,6 +250,10 @@ const Cart = () => {
 
             <button
               onClick={() => {
+                if (!profile._id) {
+                  purchase();
+                  return;
+                }
                 updateProfile().then(() => {
                   purchase();
                 });

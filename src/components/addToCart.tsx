@@ -24,10 +24,6 @@ const AddToCart = ({ product }: { product: Product }) => {
   }, [pathName]);
 
   const addToCart = async () => {
-    if (!profile) {
-      alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng");
-      return;
-    }
     if (product.classify) {
       const productClassify = JSON.parse(product.classify);
 
@@ -39,6 +35,31 @@ const AddToCart = ({ product }: { product: Product }) => {
         alert("Vui lòng chọn đầy đủ phân loại");
         return;
       }
+    }
+    const newItem = {
+      product: product,
+      quantity,
+      classify: JSON.stringify(classify),
+    };
+    if (!profile) {
+      const cart = localStorage.getItem("CART");
+      if (!cart) {
+        localStorage.setItem("CART", JSON.stringify([newItem]));
+        alert("Thêm vào giỏ hàng thành công");
+        return;
+      }
+      const newCart = JSON.parse(cart);
+      const index = newCart.findIndex((c: any) => c.product._id === product._id);
+      if (index !== -1) {
+        newCart[index].quantity += quantity;
+        localStorage.setItem("CART", JSON.stringify(newCart));
+        alert("Thêm vào giỏ hàng thành công");
+        return;
+      }
+      newCart.push(newItem);
+      localStorage.setItem("CART", JSON.stringify(newCart));
+      alert("Thêm vào giỏ hàng thành công");
+      return;
     }
 
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/add-to-cart/${profile._id}`, {

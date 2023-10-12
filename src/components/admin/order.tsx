@@ -110,7 +110,7 @@ const OrderList = () => {
             .fill(0)
             .map((_, index) => (
               <a
-                href={index === 0 ? `/admin?content=products` : `/admin?content=products&page=${index + 1}`}
+                href={index === 0 ? `/admin?content=orders` : `/admin?content=orders&page=${index + 1}`}
                 key={index}
                 className={index + 1 === page ? "active" : ""}
               >
@@ -124,12 +124,16 @@ const OrderList = () => {
           <em>Đơn hàng: {selectedOrder._id}</em>
           <div className="selected-order">
             <div className="order-user">
-              <p>
-                Họ tên: {selectedOrder.user.firstName} {selectedOrder.user.lastName}
-              </p>
-              <p>Email: {selectedOrder.user.email}</p>
-              <p>Số điện thoại: {selectedOrder.user.phone}</p>
-              <p>Địa chỉ: {selectedOrder.user.address}</p>
+              {selectedOrder.user?.firstName && selectedOrder.user?.lastName ? (
+                <p>
+                  Họ tên: {selectedOrder.user.firstName} {selectedOrder.user.lastName}
+                </p>
+              ) : (
+                <p>Họ tên: {selectedOrder.name}</p>
+              )}
+              {selectedOrder.user?.email && <p>Email: {selectedOrder.user.email}</p>}
+              <p>Số điện thoại: {selectedOrder.phone}</p>
+              <p>Địa chỉ: {selectedOrder.address}</p>
             </div>
             <div className="note">
               <p>Ghi chú:</p>

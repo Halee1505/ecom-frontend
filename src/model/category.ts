@@ -31,6 +31,7 @@ export interface Order {
     classify: string;
   }[];
   total: number;
+  name: string;
   note: string;
   phone: string;
   address: string;

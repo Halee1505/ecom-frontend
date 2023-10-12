@@ -21,9 +21,20 @@ const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
   }, [pathName]);
   const [ready, setReady] = useState(false);
   const addToCart = async (quantity: number, cart: Cart, profile: Profile | null) => {
-    if (!profile) {
-      alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng");
-      return;
+    if (!profile?._id || profile?._id === "") {
+      const getCart = localStorage.getItem("CART");
+      if (!getCart) return;
+      const parsedCart = JSON.parse(getCart) as unknown as Cart[];
+      const index = parsedCart.findIndex((c: any) => c.product._id === cart.product._id);
+      if (index !== -1) {
+        parsedCart[index].quantity = quantity;
+        localStorage.setItem("CART", JSON.stringify(parsedCart));
+        onChange();
+        return;
+      } else {
+        alert("Thêm vào giỏ hàng thất bại");
+        return;
+      }
     }
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/add-to-cart/${profile._id}`, {
       method: "POST",
@@ -113,9 +124,20 @@ const CartItem = ({ cart, onChange }: { cart: Cart; onChange: () => void }) => {
         denyText="Huỷ"
         confirmText="Đồng ý"
         onConfirm={() => {
-          if (!profile) {
-            alert("Vui lòng đăng nhập để xóa sản phẩm khỏi giỏ hàng");
-            return;
+          if (!profile?._id || profile?._id === "") {
+            const getCart = localStorage.getItem("CART");
+            if (!getCart) return;
+            const parsedCart = JSON.parse(getCart) as unknown as Cart[];
+            const index = parsedCart.findIndex((c: any) => c.product._id === cart.product._id);
+            if (index !== -1) {
+              parsedCart.splice(index, 1);
+              localStorage.setItem("CART", JSON.stringify(parsedCart));
+              onChange();
+              return;
+            } else {
+              alert("Xóa sản phẩm khỏi giỏ hàng thất bại");
+              return;
+            }
           }
           fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/remove-from-cart/${profile._id}`, {
             method: "DELETE",
