@@ -53,8 +53,7 @@ const AdminProduct = () => {
       !products.name ||
       !products.price ||
       !products.description ||
-      (listImg.length === 1 && listImg[0]?.value == "") ||
-      (classify.length === 1 && classify[0]?.value == "")
+      (listImg.length === 1 && listImg[0]?.value == "")
     ) {
       alert("Vui lòng điền đầy đủ thông tin");
       return;
@@ -75,7 +74,6 @@ const AdminProduct = () => {
           }))
       ),
     };
-
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products`, {
       method: "POST",
       headers: {
