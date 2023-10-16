@@ -57,7 +57,13 @@ const SearchPage = async ({
           </div>
         ))}
       </div>
-      <div className="pagination">
+      <div
+        className="pagination"
+        style={{
+          marginTop: "10px",
+          marginBottom: "10px",
+        }}
+      >
         {Array(Math.ceil(productCount.count / limit))
           .fill(0)
           .map((_, index) => (
