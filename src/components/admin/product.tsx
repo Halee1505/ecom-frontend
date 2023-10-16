@@ -95,9 +95,11 @@ const AdminProduct = () => {
         });
         setListImg([{ id: uuid(), value: "" }]);
         setClassify([{ id: uuid(), value: "", child: [] }]);
+        alert("Tạo mới thành công");
       })
       .catch((err) => {
         console.error(err);
+        alert("Tạo mới thất bại, vui lòng kiểm tra lại thông tin sản phẩm");
       });
   };
 
@@ -208,6 +210,7 @@ const AdminProduct = () => {
                       setProducts({ ...products, description: e });
                     }}
                     initialValue=" "
+                    value={products?.description}
                     init={{
                       height: 500,
                       menubar: false,

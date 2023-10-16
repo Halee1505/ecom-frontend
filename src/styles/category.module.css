@@ -1,5 +1,5 @@
 nav {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -19,7 +19,7 @@ nav .x {
 
 
 nav>ul {
-    position: absolute;
+    position: fixed;
     background-color: #fff;
     top: 0px;
     bottom: 0px;
@@ -53,7 +53,9 @@ nav>ul input {
 }
 
 nav>ul:has(>input[type="checkbox"]:checked) {
+    /* transform: scaleX(0); */
     transform: translateX(0);
+
 
 }
 
@@ -65,6 +67,7 @@ nav:has(>ul>input[type="checkbox"]:checked) {
 }
 
 nav>ul:has(>input[type="checkbox"]:not(:checked)) {
+    /* transform: scaleX(1); */
     transform: translateX(100%);
 
 }
