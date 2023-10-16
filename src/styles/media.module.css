@@ -185,6 +185,10 @@
     .header>h1 {
         display: none;
     }
+
+    .title {
+        font-size: 1.4em;
+    }
 }
 
 @media (max-width: 1350px) {

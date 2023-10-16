@@ -8,7 +8,6 @@ const SearchPage = async ({
   params: { lang: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
-  console.log(searchParams);
   const page = searchParams.page ? Number(searchParams.page) : 1;
   const limit = 8;
   const offset = (page - 1) * limit;
@@ -40,7 +39,7 @@ const SearchPage = async ({
       return { count: 0 };
     });
   return (
-    <div className="admin-products">
+    <div>
       {products.length === 0 ? (
         <div className="title">Không tìm thấy sản phẩm</div>
       ) : (
