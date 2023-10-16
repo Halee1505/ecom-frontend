@@ -8,7 +8,6 @@ nav {
     background-color: #27272759;
     height: 100vh;
     padding: 0px;
-    transition: all 0.3s ease-in-out;
 }
 
 nav .x {
@@ -33,7 +32,7 @@ nav>ul {
     align-items: flex-start;
     padding: 40px 20px 0px 20px;
     transform: translateX(0);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s linear;
 }
 
 nav>ul input {
@@ -64,17 +63,23 @@ nav:has(>ul>input[type="checkbox"]:checked) {
 
     z-index: 100;
     background-color: #27272759;
+    transition: all 0.3s ease-in-out;
+
 }
 
 nav>ul:has(>input[type="checkbox"]:not(:checked)) {
     /* transform: scaleX(1); */
     transform: translateX(100%);
+    transition: all 0.3s ease-in-out;
+
 
 }
 
 nav:has(>ul>input[type="checkbox"]:not(:checked)) {
     z-index: -100;
     background-color: #00000000;
+    transition: background-color 0.3s ease-in-out, z-index 0.1s ease-in-out 0.3s;
+
 }
 
 
@@ -117,6 +122,74 @@ nav>ul>li>a:hover {
     min-width: 2px;
     margin-bottom: 2px;
 }
+
+.title {
+    font-size: 2em;
+    font-weight: 600;
+    margin: 0px auto;
+    margin-top: 20px;
+    width: max-content;
+}
+
+.search {
+    display: block;
+    height: max-content;
+    position: absolute;
+    right: 0px;
+    height: 30px;
+    z-index: 1;
+}
+
+.search-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+
+}
+
+.search svg {
+    background-color: transparent;
+    fill: none !important;
+    width: 30px;
+    height: 30px;
+}
+
+.search svg path {
+    stroke: var(--primary-color);
+}
+
+.search-active svg path {
+    stroke: #fff;
+}
+
+.search-input {
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    height: 35px;
+    font-size: 16px;
+    width: 0px;
+    padding: 4px 10px;
+    position: relative;
+    transition: all 0.5s ease;
+    height: 35px;
+
+}
+
+.search-input-active {
+    width: 250px;
+    background-color: #fff;
+    border: 1px solid #fff;
+}
+
+.search-input:focus-visible {
+    outline: none;
+    border: 0px solid var(--primary-color);
+
+}
+
 
 .category-product {
     display: flex;

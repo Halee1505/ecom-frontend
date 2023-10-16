@@ -36,9 +36,6 @@
         align-items: flex-start;
     }
 
-
-
-
     .footer-center {
         flex-direction: row;
 
@@ -170,6 +167,23 @@
 
     .cart button {
         width: 100%;
+    }
+
+    .header {
+        justify-content: flex-end;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .header-active {
+        justify-content: flex-start;
+    }
+
+    .search-input-active {
+        width: 280px;
+    }
+
+    .header>h1 {
+        display: none;
     }
 }
 
