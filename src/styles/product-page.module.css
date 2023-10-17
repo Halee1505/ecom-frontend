@@ -51,13 +51,15 @@
     display: inline-block;
     height: 80px;
     display: inline-block;
-    scroll-snap-align: start;
-    opacity: 0.5;
+    /* scroll-snap-align: start; */
+    opacity: 0.3;
 }
 
 .list-img>img.selected {
     opacity: 1;
     background-color: #fff;
+    scroll-snap-align: center;
+
 
 }
 
