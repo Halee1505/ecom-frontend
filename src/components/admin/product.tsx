@@ -143,11 +143,10 @@ const AdminProduct = () => {
                     placeholder="Link ảnh"
                   />
                 ))}
-                {listImg[listImg.length - 1]?.value !== "" && listImg.length < 5 && (
+                {listImg[listImg.length - 1]?.value !== "" && (
                   <button
                     className="button-more-link"
                     onClick={() => {
-                      if (listImg.length > 5) return;
                       if (listImg[listImg.length - 1].value === "") return;
 
                       setListImg([...listImg, { id: uuid(), value: "" }]);

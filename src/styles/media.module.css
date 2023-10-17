@@ -147,6 +147,7 @@
     .product-detail {
 
         width: 100%;
+        height: max(100%, max-content);
 
     }
 
