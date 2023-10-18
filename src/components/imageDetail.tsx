@@ -14,6 +14,7 @@ const ImageDetail = ({ product }: { product: Product }) => {
         onClick={() => {
           setShow(true);
         }}
+        className="main-img"
       />
       <div className="list-img">
         {product?.image?.split(",").map((img) => (

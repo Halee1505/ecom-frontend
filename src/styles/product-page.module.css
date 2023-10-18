@@ -377,7 +377,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
+    cursor: zoom-out;
 }
 
 .modal>img {
@@ -388,4 +388,8 @@
     background-color: #fff;
     padding: 20px;
     border-radius: 10px;
+}
+
+.main-img {
+    cursor: zoom-in;
 }
