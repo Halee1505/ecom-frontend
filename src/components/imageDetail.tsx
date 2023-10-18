@@ -5,9 +5,16 @@ import { useState } from "react";
 
 const ImageDetail = ({ product }: { product: Product }) => {
   const [selectedImg, setSelectedImg] = useState(0);
+  const [show, setShow] = useState(false);
   return (
     <div>
-      <img src={product?.image?.split(",")[selectedImg]} alt={product?.name} />
+      <img
+        src={product?.image?.split(",")[selectedImg]}
+        alt={product?.name}
+        onClick={() => {
+          setShow(true);
+        }}
+      />
       <div className="list-img">
         {product?.image?.split(",").map((img) => (
           <img
@@ -19,6 +26,16 @@ const ImageDetail = ({ product }: { product: Product }) => {
           />
         ))}
       </div>
+      {show && (
+        <div
+          className="modal"
+          onClick={() => {
+            setShow(false);
+          }}
+        >
+          <img src={product?.image?.split(",")[selectedImg]} alt={product?.name} />
+        </div>
+      )}
     </div>
   );
 };
