@@ -53,6 +53,9 @@
 
 .product-item del {
     font-size: 14px;
+    width: 40%;
+
+
 
 }
 
@@ -64,10 +67,19 @@
 
 .product-info div {
     width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     border-top: 1px solid rgb(133, 133, 133);
     padding-top: 5px;
     margin-top: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.product-info h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
 }

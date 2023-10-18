@@ -47,14 +47,7 @@ const SearchPage = async ({
       )}
       <div className="product-list">
         {products?.map((product) => (
-          <div
-            key={product._id}
-            style={{
-              position: "relative",
-            }}
-          >
-            <ProductItem product={product} />
-          </div>
+          <ProductItem product={product} key={product._id} />
         ))}
       </div>
       <div
