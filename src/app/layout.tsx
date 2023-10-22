@@ -86,8 +86,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </header>
         {children}
         <div className="contact-icon">
-          <Link href="https://zalo.me/0878985729" target="_blank">
-            <Image src="/zalo-icon.png" alt="zalo" width={40} height={40} />
+          <Link href="tel:0878985729" target="_blank">
+            <Image src="/phone-icon.png" alt="phone" width={40} height={40} />
           </Link>
           <Link href="https://www.messenger.com/t/61552121156836" target="_blank">
             <Image src="/messenger-icon.png" alt="messenger" width={40} height={46} />
