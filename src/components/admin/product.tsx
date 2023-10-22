@@ -74,6 +74,9 @@ const AdminProduct = () => {
           }))
       ),
     };
+    if (NewProduct.classify === "[]") {
+      NewProduct.classify = "";
+    }
     await fetch(`${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products`, {
       method: "POST",
       headers: {
