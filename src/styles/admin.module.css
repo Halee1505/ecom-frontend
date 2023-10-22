@@ -378,3 +378,9 @@ div:has(>.add-items), div:has(>.list-item-child) {
     margin-top: 10px;
     cursor: pointer;
 }
+
+.selected-order-overlay {
+    position: sticky;
+    top: 20px;
+    height: max-content;
+}

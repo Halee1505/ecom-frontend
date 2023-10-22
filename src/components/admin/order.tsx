@@ -120,7 +120,7 @@ const OrderList = () => {
         </div>
       </div>
       {selectedOrder && (
-        <div>
+        <div className="selected-order-overlay">
           <em>Đơn hàng: {selectedOrder._id}</em>
           <div className="selected-order">
             <div className="order-user">

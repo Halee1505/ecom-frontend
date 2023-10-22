@@ -1,5 +1,6 @@
 .product-item {
     height: 380px;
+    width: 228px;
     aspect-ratio: 1.8/3;
     /* background-color: rgb(237, 237, 237); */
     box-shadow: 0 0 12px 3px rgb(176 176 176 / 41%);
