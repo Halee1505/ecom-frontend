@@ -17,6 +17,13 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   return (
     <header>
+      <label htmlFor="menu" className={`x ${showSearchBar ? "x-mobile" : ""}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="800px" height="800px" viewBox="0 -2 28 28">
+          <path d="m2.61 0h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
+          <path d="m2.61 9.39h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
+          <path d="m2.61 18.781h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
+        </svg>
+      </label>
       <div className={`header ${showSearchBar ? "header-active" : ""}`}>
         <h1>
           <a href="/">{process.env.NEXT_PUBLIC_BRAND_NAME}</a>
@@ -107,13 +114,6 @@ const Header = () => {
               </g>
             </svg>
           </a>
-          <label htmlFor="menu" className="x">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="800px" height="800px" viewBox="0 -2 28 28">
-              <path d="m2.61 0h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
-              <path d="m2.61 9.39h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
-              <path d="m2.61 18.781h22.431c1.441 0 2.61 1.168 2.61 2.61s-1.168 2.61-2.61 2.61h-22.431c-1.441 0-2.61-1.168-2.61-2.61s1.168-2.61 2.61-2.61z" />
-            </svg>
-          </label>
         </div>
       </div>
     </header>

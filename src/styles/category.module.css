@@ -12,8 +12,8 @@ nav {
 
 nav .x {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 25px;
+    left: 15px;
 }
 
 
@@ -22,7 +22,7 @@ nav>ul {
     background-color: #fff;
     top: 0px;
     bottom: 0px;
-    right: 0px;
+    left: 0px;
     height: 100vh;
     width: 300px;
     display: flex;
@@ -39,9 +39,18 @@ nav>ul input {
     display: none;
 }
 
+header {
+    position: relative;
+}
+
 .x {
     width: max-content;
     height: max-content;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+    left: 10px;
 }
 
 .x>svg {
@@ -69,7 +78,7 @@ nav:has(>ul>input[type="checkbox"]:checked) {
 
 nav>ul:has(>input[type="checkbox"]:not(:checked)) {
     /* transform: scaleX(1); */
-    transform: translateX(100%);
+    transform: translateX(-100%);
     transition: all 0.3s ease-in-out;
 
 

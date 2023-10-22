@@ -44,10 +44,17 @@
 }
 
 .product-item .price {
-    font-size: 15px;
+    font-size: 16px;
     color: #ff0000;
     font-weight: 500;
     display: inline-block;
+
+}
+
+
+.product-item .icon-star {
+    width: 20px;
+    height: 20px;
 
 }
 

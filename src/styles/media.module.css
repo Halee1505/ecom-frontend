@@ -78,11 +78,15 @@
         width: 100%;
     }
 
-    .header>h1 {
-        font-size: 22px;
-        white-space: nowrap;
+
+    .cart-total {
+        width: 100%;
     }
 
+    .profile-content {
+        width: 100%;
+
+    }
 }
 
 @media (min-width: 580px) and (max-width: 950px) {
@@ -195,6 +199,10 @@
     .title {
         font-size: 1.4em;
     }
+
+    .x-mobile {
+        left: -50px;
+    }
 }
 
 @media (max-width: 1350px) {
@@ -258,6 +266,11 @@
 @media (max-width: 630px) {
 
 
+    .header>h1 {
+        font-size: 22px;
+        white-space: nowrap;
+    }
+
     .term {
         margin: 0px calc(50% - 160px);
         width: 320px;
@@ -298,5 +311,44 @@
 
     }
 
+    .cart-content {
+        flex-direction: column;
 
+    }
+
+    .cart-total {
+        padding: 0px;
+    }
+
+    .cart-content .cart-item {
+        width: 100%;
+    }
+
+    .cart-content .cart-item>div {
+        width: max-content
+    }
+
+    .cart-content .cart-item h3, .cart-content .cart-item p {
+        max-width: unset;
+        white-space: wrap;
+        width: 100%;
+    }
+
+    .cart-total {
+        align-self: flex-end;
+        border: none;
+    }
+
+
+}
+
+@media (min-width: 650px) {
+    .search-input {
+        width: 250px;
+        background-color: #fff;
+    }
+
+    .search svg * {
+        stroke: var(--primary-color) !important;
+    }
 }
