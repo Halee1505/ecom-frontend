@@ -21,10 +21,11 @@
     }
 
     .product-item {
-        height: 260px;
+        height: 280px;
         width: 175px;
         aspect-ratio: 2/3;
         box-shadow: 0 12px 12px 3px rgb(176 176 176 / 41%);
+
     }
 
     .product-item h3 {
@@ -57,7 +58,7 @@
     }
 
     .product-item {
-        height: 260px;
+        height: 280px;
         box-shadow: 0 12px 12px 3px rgb(176 176 176 / 41%);
         width: 175px;
         aspect-ratio: 2/3;
