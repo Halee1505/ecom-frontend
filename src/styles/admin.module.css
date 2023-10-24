@@ -173,6 +173,7 @@
     width: 100%;
     background-color: #fff;
     display: flex;
+    height: max-content;
 }
 
 .admin-product table {
@@ -266,12 +267,17 @@ div:has(>.add-items), div:has(>.list-item-child) {
     scroll-snap-align: end;
 }
 
+.admin-products {
+    display: flex;
+    flex-direction: column;
+}
+
 .admin-products .product-list {
     height: max-content;
 }
 
 .admin-products .product-item {
-    height: 300px;
+    height: 360px;
 }
 
 .admin-products .product-item h3 {
@@ -282,7 +288,7 @@ div:has(>.add-items), div:has(>.list-item-child) {
     padding-top: 0px;
 }
 
-.admin-products .pagination {
+.admin-products .pagination-overlay {
     margin-top: 20px;
 }
 

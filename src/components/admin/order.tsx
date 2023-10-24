@@ -105,18 +105,35 @@ const OrderList = () => {
             </div>
           ))}
         </div>
-        <div className="pagination">
-          {Array(Math.ceil(ordersCount.count / limit))
-            .fill(0)
-            .map((_, index) => (
-              <a
-                href={index === 0 ? `/admin?content=orders` : `/admin?content=orders&page=${index + 1}`}
-                key={index}
-                className={index + 1 === page ? "active" : ""}
-              >
-                {index + 1}
-              </a>
-            ))}
+        <div className="pagination-overlay">
+          <div className="pagination">
+            {Array(Math.ceil(ordersCount.count / limit))
+              .fill(0)
+              .map((_, index) => (
+                <a
+                  href={index === 0 ? `/admin?content=orders` : `/admin?content=orders&page=${index + 1}`}
+                  key={index}
+                  className={index + 1 === page ? "active" : ""}
+                >
+                  {index + 1}
+                </a>
+              ))}
+          </div>
+          <select
+            onChange={(e) => {
+              const page = Number(e.target.value);
+              window.location.href = page === 1 ? `/admin?content=orders` : `/admin?content=orders&page=${page}`;
+            }}
+            value={page}
+          >
+            {Array(Math.ceil(ordersCount.count / limit))
+              .fill(0)
+              .map((_, index) => (
+                <option value={index + 1} key={index} className={index + 1 === page ? "active" : ""}>
+                  Trang {index + 1}
+                </option>
+              ))}
+          </select>
         </div>
       </div>
       {selectedOrder && (

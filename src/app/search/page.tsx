@@ -9,7 +9,7 @@ const SearchPage = async ({
   searchParams: { [key: string]: string | string[] | undefined };
 }) => {
   const page = searchParams.page ? Number(searchParams.page) : 1;
-  const limit = 8;
+  const limit = 24;
   const offset = (page - 1) * limit;
   const products: Product[] = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products?key=${searchParams.key}&limit=${limit}&offset=${offset}`,
@@ -51,25 +51,27 @@ const SearchPage = async ({
         ))}
       </div>
       <div
-        className="pagination"
+        className="pagination-overlay"
         style={{
           marginTop: "10px",
           marginBottom: "10px",
         }}
       >
-        {Array(Math.ceil(productCount.count / limit))
-          .fill(0)
-          .map((_, index) => (
-            <a
-              href={
-                index === 0 ? `/search?key=${searchParams.key}` : `/search?key=${searchParams.key}&page=${index + 1}`
-              }
-              key={index}
-              className={index + 1 === page ? "active" : ""}
-            >
-              {index + 1}
-            </a>
-          ))}
+        <div className="pagination">
+          {Array(Math.ceil(productCount.count / limit))
+            .fill(0)
+            .map((_, index) => (
+              <a
+                href={
+                  index === 0 ? `/search?key=${searchParams.key}` : `/search?key=${searchParams.key}&page=${index + 1}`
+                }
+                key={index}
+                className={index + 1 === page ? "active" : ""}
+              >
+                {index + 1}
+              </a>
+            ))}
+        </div>
       </div>
     </div>
   );

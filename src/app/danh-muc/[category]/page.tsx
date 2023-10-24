@@ -10,7 +10,7 @@ const CategoryPage = async ({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
   const page = searchParams?.page ? Number(searchParams.page) : 1;
-  const limit = searchParams?.limit ? Number(searchParams.limit) : 8;
+  const limit = searchParams?.limit ? Number(searchParams.limit) : 24;
   const offset = (page - 1) * limit;
   const products: Product[] = await fetch(
     `${process.env.NEXT_PUBLIC_SERVER_DOMAIN}/products/category/${params.category}?limit=${limit}&offset=${offset}&isActive=true`,
@@ -37,29 +37,25 @@ const CategoryPage = async ({
   return (
     <div>
       <div className="category-product">
-        {/* <div className="search">
-          <input type="text" placeholder="Tìm kiếm sản phẩm" />
-          <button>
-            Timf
-          </button>
-        </div> */}
         <div className="product-list">
           {products?.map((product) => (
             <ProductItem key={product._id} product={product} />
           ))}
         </div>
-        <div className="pagination">
-          {Array(Math.ceil(productsCount.count / 8))
-            .fill(0)
-            .map((_, index) => (
-              <a
-                href={index === 0 ? `/danh-muc/${params.category}` : `/danh-muc/${params.category}?page=${index + 1}`}
-                key={index}
-                className={index + 1 === page ? "active" : ""}
-              >
-                {index + 1}
-              </a>
-            ))}
+        <div className="pagination-overlay">
+          <div className="pagination">
+            {Array(Math.ceil(productsCount.count / limit))
+              .fill(0)
+              .map((_, index) => (
+                <a
+                  href={index === 0 ? `/danh-muc/${params.category}` : `/danh-muc/${params.category}?page=${index + 1}`}
+                  key={index}
+                  className={index + 1 === page ? "active" : ""}
+                >
+                  {index + 1}
+                </a>
+              ))}
+          </div>
         </div>
       </div>
     </div>

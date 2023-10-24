@@ -43,7 +43,7 @@ const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [productsCount, setProductsCount] = useState<{ count: number }>({ count: 0 });
   const page = searchParams?.get("page") ? Number(searchParams.get("page")) : 1;
-  const limit = 8;
+  const limit = 24;
   const offset = (page - 1) * limit;
   useEffect(() => {
     (async () => {
@@ -101,18 +101,35 @@ const ProductList = () => {
           </div>
         ))}
       </div>
-      <div className="pagination">
-        {Array(Math.ceil(productsCount.count / limit))
-          .fill(0)
-          .map((_, index) => (
-            <a
-              href={index === 0 ? `/admin?content=products` : `/admin?content=products&page=${index + 1}`}
-              key={index}
-              className={index + 1 === page ? "active" : ""}
-            >
-              {index + 1}
-            </a>
-          ))}
+      <div className="pagination-overlay">
+        <div className="pagination">
+          {Array(Math.ceil(productsCount.count / limit))
+            .fill(0)
+            .map((_, index) => (
+              <a
+                href={index === 0 ? `/admin?content=products` : `/admin?content=products&page=${index + 1}`}
+                key={index}
+                className={index + 1 === page ? "active" : ""}
+              >
+                {index + 1}
+              </a>
+            ))}
+        </div>
+        <select
+          onChange={(e) => {
+            const page = Number(e.target.value);
+            window.location.href = page === 1 ? `/admin?content=products` : `/admin?content=products&page=${page}`;
+          }}
+          value={page}
+        >
+          {Array(Math.ceil(productsCount.count / limit))
+            .fill(0)
+            .map((_, index) => (
+              <option value={index + 1} key={index} className={index + 1 === page ? "active" : ""}>
+                Trang {index + 1}
+              </option>
+            ))}
+        </select>
       </div>
     </div>
   );

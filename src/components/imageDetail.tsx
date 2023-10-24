@@ -7,7 +7,7 @@ const ImageDetail = ({ product }: { product: Product }) => {
   const [selectedImg, setSelectedImg] = useState(0);
   const [show, setShow] = useState(false);
   return (
-    <div>
+    <div className="image-detail-overlay">
       <img
         src={product?.image?.split(",")[selectedImg]}
         alt={product?.name}
@@ -23,6 +23,20 @@ const ImageDetail = ({ product }: { product: Product }) => {
             alt={product?.name}
             className={product?.image?.split(",").indexOf(img) === selectedImg ? "selected" : ""}
             onClick={() => setSelectedImg(product?.image?.split(",").indexOf(img))}
+            key={img}
+          />
+        ))}
+      </div>
+      <div className="carousel-image-detail">
+        {product?.image?.split(",").map((img) => (
+          <img
+            src={img}
+            alt={product?.name}
+            className={product?.image?.split(",").indexOf(img) === selectedImg ? "selected" : ""}
+            onClick={() => {
+              setSelectedImg(product?.image?.split(",").indexOf(img));
+              setShow(true);
+            }}
             key={img}
           />
         ))}

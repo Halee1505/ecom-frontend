@@ -300,6 +300,10 @@
     margin-left: 20px;
 }
 
+.carousel-image-detail {
+    display: none;
+}
+
 
 
 
@@ -394,4 +398,11 @@
 
 .main-img {
     cursor: zoom-in;
+}
+
+.image-detail-overlay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
 }
